@@ -148,14 +148,31 @@ Try running `cargo --version` to diagnose the problem.";
 mod tests {
     use super::*;
 
+    #[cfg(windows)]
+    fn echo_command() -> Command {
+        let mut cmd = Command::new("cmd.exe");
+        cmd.args(["/C", "echo"]);
+        cmd
+    }
+
+    #[cfg(not(windows))]
+    fn echo_command() -> Command {
+        Command::new("echo")
+    }
+
     #[test]
     fn test_run_cmd() {
-        let mut cmd = Command::new("echo");
+        let mut cmd = echo_command();
         cmd.arg("Hello");
 
         let mut output = Vec::with_capacity(8);
         run_cmd(cmd, "echo …", Some(&mut output)).unwrap();
 
-        assert_eq!(output, b"Hello\n\n");
+        let expected: &[u8] = if cfg!(windows) {
+            b"Hello\r\n\n"
+        } else {
+            b"Hello\n\n"
+        };
+        assert_eq!(output, expected);
     }
 }
