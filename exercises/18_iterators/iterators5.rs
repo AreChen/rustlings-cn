@@ -1,8 +1,6 @@
-// Let's define a simple model to track Rustlings' exercise progress. Progress
-// will be modelled using a hash map. The name of the exercise is the key and
-// the progress is the value. Two counting functions were created to count the
-// number of exercises with a given progress. Recreate this counting
-// functionality using iterators. Try to not use imperative loops (for/while).
+// 我们定义一个简单模型来跟踪 Rustlings 的练习进度。进度将使用哈希映射表示，
+// 练习名称是键，进度是值。这里提供了两个计数函数，用于统计处于给定进度的练习数。
+// 请使用迭代器重现这种计数功能，尽量不要使用命令式循环（for/while）。
 
 use std::collections::HashMap;
 
@@ -23,11 +21,10 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
     count
 }
 
-// TODO: Implement the functionality of `count_for` but with an iterator instead
-// of a `for` loop.
+// TODO: 使用迭代器实现 `count_for` 的功能，而不是使用 `for` 循环。
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
-    // `map` is a hash map with `String` keys and `Progress` values.
-    // map = { "variables1": Complete, "from_str": None, … }
+    // `map` 是一个以 `String` 为键、以 `Progress` 为值的哈希映射。
+    // 示例：map = { "variables1": Complete, "from_str": None, … }
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -42,16 +39,15 @@ fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progres
     count
 }
 
-// TODO: Implement the functionality of `count_collection_for` but with an
-// iterator instead of a `for` loop.
+// TODO: 使用迭代器实现 `count_collection_for` 的功能，而不是使用 `for` 循环。
 fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
-    // `collection` is a slice of hash maps.
-    // collection = [{ "variables1": Complete, "from_str": None, … },
-    //               { "variables2": Complete, … }, … ]
+    // `collection` 是哈希映射组成的切片。
+    // 示例：collection = [{ "variables1": Complete, "from_str": None, … },
+    //                     示例续行：{ "variables2": Complete, … }, … ]
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]

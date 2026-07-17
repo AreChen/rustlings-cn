@@ -13,24 +13,23 @@ fn run_cmd(mut cmd: Command, description: &str, output: Option<&mut Vec<u8>>) ->
         // NOTE: The closure drops `cmd` which prevents a pipe deadlock.
         cmd.stdin(Stdio::null())
             .spawn()
-            .with_context(|| format!("Failed to run the command `{description}`"))
+            .with_context(|| format!("运行命令 `{description}` 失败"))
     };
 
     let mut handle = if let Some(output) = output {
-        let (mut reader, writer) = pipe().with_context(|| {
-            format!("Failed to create a pipe to run the command `{description}``")
-        })?;
+        let (mut reader, writer) =
+            pipe().with_context(|| format!("创建用于运行命令 `{description}` 的管道失败"))?;
 
-        let writer_clone = writer.try_clone().with_context(|| {
-            format!("Failed to clone the pipe writer for the command `{description}`")
-        })?;
+        let writer_clone = writer
+            .try_clone()
+            .with_context(|| format!("复制命令 `{description}` 的管道写入端失败"))?;
 
         cmd.stdout(writer_clone).stderr(writer);
         let handle = spawn(cmd)?;
 
         reader
             .read_to_end(output)
-            .with_context(|| format!("Failed to read the output of the command `{description}`"))?;
+            .with_context(|| format!("读取命令 `{description}` 的输出失败"))?;
 
         output.push(b'\n');
 
@@ -42,7 +41,7 @@ fn run_cmd(mut cmd: Command, description: &str, output: Option<&mut Vec<u8>>) ->
 
     handle
         .wait()
-        .with_context(|| format!("Failed to wait on the command `{description}` to exit"))
+        .with_context(|| format!("等待命令 `{description}` 退出失败"))
         .map(|status| status.success())
 }
 
@@ -71,13 +70,11 @@ impl CmdRunner {
             .context(CARGO_METADATA_ERR)?;
 
         if !metadata_output.status.success() {
-            bail!("The command `cargo metadata …` failed. Are you in the `rustlings/` directory?");
+            bail!("命令 `cargo metadata …` 执行失败。当前目录是 `rustlings/` 吗？");
         }
 
         let metadata: CargoMetadata = serde_json::de::from_slice(&metadata_output.stdout)
-            .context(
-                "Failed to read the field `target_directory` from the output of the command `cargo metadata …`",
-            )?;
+            .context("无法从命令 `cargo metadata …` 的输出中读取字段 `target_directory`")?;
 
         Ok(Self {
             target_dir: metadata.target_directory,
@@ -140,9 +137,9 @@ impl CargoSubcommand<'_> {
     }
 }
 
-const CARGO_METADATA_ERR: &str = "Failed to run the command `cargo metadata …`
-Did you already install Rust?
-Try running `cargo --version` to diagnose the problem.";
+const CARGO_METADATA_ERR: &str = "运行命令 `cargo metadata …` 失败
+是否已经安装 Rust？
+请运行 `cargo --version` 来诊断问题。";
 
 #[cfg(test)]
 mod tests {

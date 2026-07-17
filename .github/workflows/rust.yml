@@ -3,16 +3,8 @@ name: Check
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - website
-      - .github/workflows/website.yml
-      - '*.md'
   pull_request:
     branches: [main]
-    paths-ignore:
-      - website
-      - .github/workflows/website.yml
-      - '*.md'
 
 env:
   CARGO_TERM_COLOR: always
@@ -54,3 +46,17 @@ jobs:
       steps:
         - uses: actions/checkout@v7
         - uses: rvben/rumdl@v0
+  translation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch official upstream
+        run: |
+          git remote add upstream https://github.com/rust-lang/rustlings.git
+          git fetch --no-tags --depth=1 upstream main
+      - name: Test translation checker
+        run: python scripts/test_check_translation.py
+      - name: Check Chinese coverage and upstream drift
+        run: python scripts/check_translation.py --upstream-ref FETCH_HEAD
+      - name: Check whitespace
+        run: git diff --check

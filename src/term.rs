@@ -93,20 +93,20 @@ impl<'a, 'lock> CheckProgressVisualizer<'a, 'lock> {
 
     pub fn build(stdout: &'a mut StdoutLock<'lock>, term_width: u16) -> io::Result<Self> {
         clear_terminal(stdout)?;
-        stdout.write_all("Checking all exercises…\n".as_bytes())?;
+        stdout.write_all("正在检查所有练习……\n".as_bytes())?;
 
         // Legend
-        stdout.write_all(b"Color of exercise number: ")?;
+        stdout.write_all("练习编号颜色：".as_bytes())?;
         stdout.queue(SetForegroundColor(Self::CHECKING_COLOR))?;
-        stdout.write_all(b"Checking")?;
+        stdout.write_all("检查中".as_bytes())?;
         stdout.queue(ResetColor)?;
         stdout.write_all(b" - ")?;
         stdout.queue(SetForegroundColor(Self::DONE_COLOR))?;
-        stdout.write_all(b"Done")?;
+        stdout.write_all("已完成".as_bytes())?;
         stdout.queue(ResetColor)?;
         stdout.write_all(b" - ")?;
         stdout.queue(SetForegroundColor(Self::PENDING_COLOR))?;
-        stdout.write_all(b"Pending")?;
+        stdout.write_all("待完成".as_bytes())?;
         stdout.queue(ResetColor)?;
         stdout.write_all(b"\n")?;
 
@@ -162,7 +162,7 @@ pub struct ProgressCounter<'a, 'lock> {
 
 impl<'a, 'lock> ProgressCounter<'a, 'lock> {
     pub fn new(stdout: &'a mut StdoutLock<'lock>, total: usize) -> io::Result<Self> {
-        write!(stdout, "Progress: 0/{total}")?;
+        write!(stdout, "进度：0/{total}")?;
         stdout.flush()?;
 
         Ok(Self {
@@ -174,7 +174,7 @@ impl<'a, 'lock> ProgressCounter<'a, 'lock> {
 
     pub fn increment(&mut self) -> io::Result<()> {
         self.counter += 1;
-        write!(self.stdout, "\rProgress: {}/{}", self.counter, self.total)?;
+        write!(self.stdout, "\r进度：{}/{}", self.counter, self.total)?;
         self.stdout.flush()
     }
 }
@@ -191,8 +191,9 @@ pub fn progress_bar<'a>(
     total: u32,
     term_width: u16,
 ) -> io::Result<()> {
-    const PREFIX: &[u8] = b"Progress: [";
-    const PREFIX_WIDTH: u16 = PREFIX.len() as u16;
+    const PREFIX: &str = "进度：[";
+    // 进度条前缀的终端显示宽度：三个全宽字符和一个 ASCII 字符。
+    const PREFIX_WIDTH: u16 = 7;
     const POSTFIX_WIDTH: u16 = "] xxx/xxx".len() as u16;
     const WRAPPER_WIDTH: u16 = PREFIX_WIDTH + POSTFIX_WIDTH;
     const MIN_LINE_WIDTH: u16 = WRAPPER_WIDTH + 4;
@@ -201,13 +202,13 @@ pub fn progress_bar<'a>(
     debug_assert!(progress <= total);
 
     if term_width < MIN_LINE_WIDTH {
-        writer.write_ascii(b"Progress: ")?;
+        writer.write_str("进度：")?;
         // Integers are in ASCII.
         return writer.write_ascii(format!("{progress}/{total}").as_bytes());
     }
 
     let stdout = writer.stdout();
-    stdout.write_all(PREFIX)?;
+    stdout.write_all(PREFIX.as_bytes())?;
 
     // Use u32 to prevent the intermediate multiplication from overflowing
     let width = u32::from(term_width - WRAPPER_WIDTH);

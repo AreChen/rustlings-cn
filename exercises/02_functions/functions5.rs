@@ -5,5 +5,5 @@ fn square(num: i32) -> i32 {
 
 fn main() {
     let answer = square(3);
-    println!("The square of 3 is {answer}");
+    println!("3 的平方是 {answer}");
 }

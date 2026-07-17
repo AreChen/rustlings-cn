@@ -1,11 +1,11 @@
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]
 mod tests {
-    // TODO: Fix the compiler errors only by reordering the lines in the test.
-    // Don't add, change or remove any line.
+    // TODO: 只能通过调整测试中各行的顺序来修复编译器错误。
+    // 不要添加、修改或删除任何行。
     #[test]
     fn move_semantics4() {
         let mut x = Vec::new();

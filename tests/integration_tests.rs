@@ -125,7 +125,7 @@ fn hint() {
     Cmd::default()
         .current_dir("tests/test_exercises")
         .args(&["hint", "test_failure"])
-        .output(PartialStdout("\n\nHint:\nThe answer to everything: 42\n"))
+        .output(PartialStdout("\n\n提示：\nThe answer to everything: 42\n"))
         .success();
 }
 
@@ -154,6 +154,6 @@ fn init() {
     Cmd::default()
         .current_dir(&initialized_dir)
         .args(&["init"])
-        .output(PartialStderr("already initialized"))
+        .output(PartialStderr("Rustlings 似乎已经在此目录中初始化"))
         .fail();
 }

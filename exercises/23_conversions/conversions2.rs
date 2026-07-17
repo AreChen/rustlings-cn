@@ -1,26 +1,25 @@
-// The `From` trait is used for value-to-value conversions. If `From` is
-// implemented, an implementation of `Into` is automatically provided.
-// You can read more about it in the documentation:
-// https://doc.rust-lang.org/std/convert/trait.From.html
+// `From` trait 用于值到值的转换。实现 `From` 后，系统会自动提供 `Into` 的实现。
+// 你可以在文档中了解更多信息：
+// 文档链接：https://doc.rust-lang.org/std/convert/trait.From.html
 //
-// Representing units of measurements with separate types is a common practice.
-// It avoids accidentally mixing up values of different units of measurement.
+// 使用不同类型表示度量单位是一种常见做法。
+// 这样可以避免意外混淆不同度量单位的值。
 
 struct Celsius(f64);
 
 struct Fahrenheit(f64);
 
 impl From<Celsius> for Fahrenheit {
-    // TODO: Convert Celsius to Fahrenheit. Don't worry about floating-point
-    // precision. The formula is: F = C * 1.8 + 32
+    // TODO: 将摄氏度转换为华氏度。不必担心浮点精度。
+    // 公式为：F = C * 1.8 + 32
 }
 
 impl From<Fahrenheit> for Celsius {
-    // TODO: Convert Fahrenheit to Celsius.
+    // TODO: 将华氏度转换为摄氏度。
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]

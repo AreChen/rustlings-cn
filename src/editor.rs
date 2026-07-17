@@ -14,13 +14,13 @@ fn run_cmd(cmd: &mut Command) -> Result<Vec<u8>> {
     let output = cmd
         .stdin(Stdio::null())
         .output()
-        .with_context(|| format!("Failed to run the command {cmd:?}"))?;
+        .with_context(|| format!("运行命令 {cmd:?} 失败"))?;
 
     if !output.status.success() {
         bail!(
-            "The command {cmd:?} didn't run successfully\n\n\
-            stdout:\n{}\n\n\
-            stderr:\n{}",
+            "命令 {cmd:?} 执行未成功\n\n\
+            标准输出：\n{}\n\n\
+            标准错误：\n{}",
             str::from_utf8(&output.stdout).unwrap_or_default(),
             str::from_utf8(&output.stderr).unwrap_or_default(),
         );
@@ -56,10 +56,10 @@ impl Editor {
 
         if let Some(cmd) = cmd {
             let shlex = &mut Shlex::new(&cmd);
-            let program = shlex.next().context("Program missing in `--edit-cmd`")?;
+            let program = shlex.next().context("`--edit-cmd` 中未指定程序")?;
             let args = shlex.collect();
             if shlex.had_error {
-                bail!("Failed to parse the command in `--edit-cmd`");
+                bail!("无法解析 `--edit-cmd` 中的命令");
             }
             return Ok(Some(Self::Cmd(Cow::Owned(program), args)));
         }
@@ -101,7 +101,7 @@ impl Editor {
                         )?;
 
                         let (pane_id_str, pane_id) = zellij::parse_pane_id(&stdout)
-                            .context("Failed to parse the ID of the new Zellij pane")?;
+                            .context("无法解析新 Zellij 窗格的 ID")?;
 
                         *open_pane = Some((pane_id_str, pane_id, exercise_ind));
                     }
@@ -109,7 +109,7 @@ impl Editor {
 
                 Ok(self)
             })
-            .context("Failed to spawn a thread to open the editor")?;
+            .context("创建用于打开编辑器的线程失败")?;
 
         Ok(EditorJoinHandle(Some(handle)))
     }

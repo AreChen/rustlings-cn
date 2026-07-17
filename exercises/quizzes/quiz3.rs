@@ -1,24 +1,21 @@
-// This quiz tests:
+// 本测验测试：
 // - Generics
 // - Traits
 //
-// An imaginary magical school has a new report card generation system written
-// in Rust! Currently, the system only supports creating report cards where the
-// student's grade is represented numerically (e.g. 1.0 -> 5.5). However, the
-// school also issues alphabetical grades (A+ -> F-) and needs to be able to
-// print both types of report card!
+// 一所虚构的魔法学校有一个用 Rust 编写的新成绩单生成系统！目前系统只支持创建
+// 用数字表示成绩的成绩单（例如 1.0 -> 5.5）。但是学校也会颁发字母成绩（A+ -> F-），
+// 因此需要能够打印这两种成绩单！
 //
-// Make the necessary code changes in the struct `ReportCard` and the impl
-// block to support alphabetical report cards in addition to numerical ones.
+// 修改结构体 `ReportCard` 和 impl 块中的代码，使系统除了数字成绩单之外也支持字母成绩单。
 
-// TODO: Adjust the struct as described above.
+// TODO: 按照上面的描述调整结构体。
 struct ReportCard {
     grade: f32,
     student_name: String,
     student_age: u8,
 }
 
-// TODO: Adjust the impl block as described above.
+// TODO: 按照上面的描述调整 impl 块。
 impl ReportCard {
     fn print(&self) -> String {
         format!(
@@ -29,7 +26,7 @@ impl ReportCard {
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]

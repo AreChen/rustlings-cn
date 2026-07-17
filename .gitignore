@@ -15,5 +15,9 @@ Cargo.lock
 .idea
 *.iml
 
+# Python tooling cache
+__pycache__/
+*.py[cod]
+
 # Ignore file for editors like Helix
 .ignore

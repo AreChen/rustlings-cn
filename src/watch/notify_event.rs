@@ -58,7 +58,7 @@ impl NotifyEventHandler {
                     }
                 }
             })
-            .context("Failed to spawn a thread to debounce file changes")?;
+            .context("创建用于合并文件变更事件的线程失败")?;
 
         Ok(Self {
             error_sender,

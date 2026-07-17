@@ -24,7 +24,7 @@ fn handle_list(app_state: &mut AppState, stdout: &mut StdoutLock) -> Result<()> 
     let mut is_searching = false;
 
     loop {
-        match event::read().context("Failed to read terminal event")? {
+        match event::read().context("无法读取终端事件")? {
             Event::Key(key) => {
                 match key.kind {
                     KeyEventKind::Release => continue,
@@ -63,23 +63,23 @@ fn handle_list(app_state: &mut AppState, stdout: &mut StdoutLock) -> Result<()> 
                     KeyCode::Char('d') => {
                         if list_state.filter() == Filter::Done {
                             list_state.set_filter(Filter::None);
-                            list_state.message.push_str("Disabled filter DONE");
+                            list_state.message.push_str("已关闭“已完成”筛选");
                         } else {
                             list_state.set_filter(Filter::Done);
-                            list_state.message.push_str(
-                                "Enabled filter DONE │ Press d again to disable the filter",
-                            );
+                            list_state
+                                .message
+                                .push_str("已开启“已完成”筛选 │ 再按 d 关闭筛选");
                         }
                     }
                     KeyCode::Char('p') => {
                         if list_state.filter() == Filter::Pending {
                             list_state.set_filter(Filter::None);
-                            list_state.message.push_str("Disabled filter PENDING");
+                            list_state.message.push_str("已关闭“待完成”筛选");
                         } else {
                             list_state.set_filter(Filter::Pending);
-                            list_state.message.push_str(
-                                "Enabled filter PENDING │ Press p again to disable the filter",
-                            );
+                            list_state
+                                .message
+                                .push_str("已开启“待完成”筛选 │ 再按 p 关闭筛选");
                         }
                     }
                     KeyCode::Char('r') => list_state.reset_selected()?,

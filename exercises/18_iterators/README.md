@@ -1,8 +1,8 @@
-# Iterators
+# 迭代器
 
-This section will teach you about Iterators.
+本节将介绍迭代器。
 
-## Further information
+## 延伸阅读
 
-- [Iterator](https://doc.rust-lang.org/book/ch13-02-iterators.html)
-- [Iterator documentation](https://doc.rust-lang.org/stable/std/iter/)
+- [迭代器](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+- [迭代器文档](https://doc.rust-lang.org/stable/std/iter/)

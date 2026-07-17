@@ -42,7 +42,7 @@ fn main() -> Result<ExitCode> {
 
     'priority_cmd: {
         match args.command {
-            Some(Command::Init) => init::init().context("Initialization failed")?,
+            Some(Command::Init) => init::init().context("初始化失败")?,
             Some(Command::Dev(dev_command)) => dev_command.run()?,
             _ => break 'priority_cmd,
         }
@@ -86,7 +86,7 @@ fn main() -> Result<ExitCode> {
                 write!(
                     stdout,
                     "{welcome_message}\n\n\
-                     Press ENTER to continue "
+                     按 ENTER 继续 "
                 )?;
                 press_enter_prompt(&mut stdout)?;
                 clear_terminal(&mut stdout)?;
@@ -100,7 +100,7 @@ fn main() -> Result<ExitCode> {
     match args.command {
         None => {
             if !io::stdout().is_terminal() {
-                bail!("Unsupported or missing terminal/TTY");
+                bail!("不支持的终端，或缺少终端/TTY");
             }
 
             let notify_exercise_names = if args.manual_run {
@@ -137,11 +137,11 @@ fn main() -> Result<ExitCode> {
                 stdout.write_all(b"\n\n")?;
                 let pending = app_state.n_pending();
                 if pending == 1 {
-                    stdout.write_all(b"One exercise pending: ")?;
+                    stdout.write_all("有一个练习待完成：".as_bytes())?;
                 } else {
                     write!(
                         stdout,
-                        "{pending}/{} exercises pending. The first: ",
+                        "{pending}/{} 个练习待完成。第一个：",
                         app_state.exercises().len(),
                     )?;
                 }
@@ -161,9 +161,9 @@ fn main() -> Result<ExitCode> {
 
             let current_exercise = app_state.current_exercise();
             let mut stdout = io::stdout().lock();
-            stdout.write_all(b"The exercise ")?;
+            stdout.write_all("练习 ".as_bytes())?;
             current_exercise.terminal_file_link(&mut stdout, app_state.emit_file_links())?;
-            stdout.write_all(b" has been reset\n")?;
+            stdout.write_all(" 已重置\n".as_bytes())?;
         }
         Some(Command::Hint { name }) => {
             if let Some(name) = name {
@@ -172,10 +172,10 @@ fn main() -> Result<ExitCode> {
 
             let current_exercise = app_state.current_exercise();
             let mut stdout = io::stdout().lock();
-            stdout.write_all(b"Current exercise: ")?;
+            stdout.write_all("当前练习：".as_bytes())?;
             current_exercise.terminal_file_link(&mut stdout, app_state.emit_file_links())?;
 
-            stdout.write_all(b"\n\nHint:\n")?;
+            stdout.write_all("\n\n提示：\n".as_bytes())?;
             stdout.write_all(current_exercise.hint.as_bytes())?;
             stdout.write_all(b"\n")?;
         }
@@ -186,19 +186,17 @@ fn main() -> Result<ExitCode> {
     Ok(ExitCode::SUCCESS)
 }
 
-const OLD_METHOD_ERR: &str =
-    "You are trying to run Rustlings using the old method before version 6.
-The new method doesn't include cloning the Rustlings' repository.
-Please follow the instructions in `README.md`:
-https://github.com/rust-lang/rustlings#getting-started";
+const OLD_METHOD_ERR: &str = "你正在使用 6.0 之前的旧方式运行 Rustlings。
+新方式不需要克隆 Rustlings 仓库。
+请按照 `README.md` 中的说明操作：
+官方说明：https://github.com/rust-lang/rustlings#getting-started";
 
-const FORMAT_VERSION_HIGHER_ERR: &str =
-    "The format version specified in the `info.toml` file is higher than the last one supported.
-It is possible that you have an outdated version of Rustlings.
-Try to install the latest Rustlings version first.";
+const FORMAT_VERSION_HIGHER_ERR: &str = "`info.toml` 文件中指定的格式版本高于当前支持的最高版本。
+你使用的 Rustlings 可能已经过时。
+请先安装最新版本的 Rustlings。";
 
 const PRE_INIT_MSG: &str = r"
-       Welcome to...
+       欢迎来到……
                  _   _ _
   _ __ _   _ ___| |_| (_)_ __   __ _ ___
  | '__| | | / __| __| | | '_ \ / _` / __|
@@ -206,5 +204,5 @@ const PRE_INIT_MSG: &str = r"
  |_|   \__,_|___/\__|_|_|_| |_|\__, |___/
                                |___/
 
-The `exercises/` directory couldn't be found in the current directory.
-If you are just starting with Rustlings, run the command `rustlings init` to initialize it.";
+在当前目录中找不到 `exercises/` 目录。
+如果你刚开始使用 Rustlings，请运行 `rustlings init` 命令进行初始化。";

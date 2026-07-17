@@ -30,17 +30,21 @@ rustlings hint             # 查看下一个练习的提示
 
 ## 中文翻译范围
 
-当前优先翻译入门、变量、函数、条件判断和基本类型主题的说明、提示和注释。Rust 代码、命令、文件名、API 名称和测试行为保持不变，便于与官方 Rustlings 同步，也便于学习者搜索英文资料。
+本仓库覆盖当前官方 Rustlings 6.5.0 的全部练习 README、练习说明与注释，以及 CLI 的学习者可见文案。Rust 代码、命令、文件名、API 名称和测试行为保持不变，便于与官方 Rustlings 同步，也便于学习者搜索英文资料。
+
+翻译覆盖率由 [`scripts/check_translation.py`](scripts/check_translation.py) 自动审计；代码标识符、测试契约字符串、路径和其他必须保留的技术内容会单独列为“保留”，不会被误判为英文缺口。
 
 翻译状态和贡献规则见 [`TRANSLATION.md`](TRANSLATION.md)。
 
 ## 参与贡献
 
-请先阅读 [`TRANSLATION.md`](TRANSLATION.md)，选择一个尚未完成的文件或主题。修改后运行：
+请先阅读 [`TRANSLATION.md`](TRANSLATION.md)，再选择一个需要审校或同步的文件。修改后运行：
 
 ```bash
 cargo test --all-targets
 cargo run -- --help
+python scripts/test_check_translation.py
+python scripts/check_translation.py --skip-upstream
 git diff --check
 ```
 

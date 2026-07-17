@@ -33,7 +33,7 @@ fn check_cargo_toml(
     exercise_path_prefix: &[u8],
 ) -> Result<()> {
     let current_cargo_toml = fs::read_to_string(cargo_toml_path)
-        .with_context(|| format!("Failed to read the file `{cargo_toml_path}`"))?;
+        .with_context(|| format!("读取文件 `{cargo_toml_path}` 失败"))?;
 
     let (bins_start_ind, bins_end_ind) = bins_start_end_ind(&current_cargo_toml)?;
 
@@ -44,12 +44,12 @@ fn check_cargo_toml(
     if old_bins != new_bins {
         if cfg!(debug_assertions) {
             bail!(
-                "The file `dev/Cargo.toml` is outdated. Run `cargo dev update` to update it. Then run `cargo run -- dev check` again"
+                "文件 `dev/Cargo.toml` 已过期。请运行 `cargo dev update` 更新，然后再次运行 `cargo run -- dev check`"
             );
         }
 
         bail!(
-            "The file `Cargo.toml` is outdated. Run `rustlings dev update` to update it. Then run `rustlings dev check` again"
+            "文件 `Cargo.toml` 已过期。请运行 `rustlings dev update` 更新，然后再次运行 `rustlings dev check`"
         );
     }
 
@@ -65,34 +65,30 @@ fn check_info_file_exercises(info_file: &InfoFile) -> Result<HashSet<PathBuf>> {
     for exercise_info in &info_file.exercises {
         let name = exercise_info.name;
         if name.is_empty() {
-            bail!("Found an empty exercise name in `info.toml`");
+            bail!("`info.toml` 中存在空的练习名称");
         }
         if name.len() > MAX_EXERCISE_NAME_LEN {
-            bail!(
-                "The length of the exercise name `{name}` is bigger than the maximum {MAX_EXERCISE_NAME_LEN}"
-            );
+            bail!("练习名称 `{name}` 的长度超过上限 {MAX_EXERCISE_NAME_LEN}");
         }
         if let Some(c) = forbidden_char(name) {
-            bail!("Char `{c}` in the exercise name `{name}` is not allowed");
+            bail!("练习名称 `{name}` 中的字符 `{c}` 不被允许");
         }
 
         if let Some(dir) = exercise_info.dir {
             if dir.is_empty() {
-                bail!("The exercise `{name}` has an empty dir name in `info.toml`");
+                bail!("练习 `{name}` 在 `info.toml` 中的目录名称为空");
             }
             if let Some(c) = forbidden_char(dir) {
-                bail!("Char `{c}` in the exercise dir `{dir}` is not allowed");
+                bail!("练习目录 `{dir}` 中的字符 `{c}` 不被允许");
             }
         }
 
         if exercise_info.hint.trim_ascii().is_empty() {
-            bail!(
-                "The exercise `{name}` has an empty hint. Please provide a hint or at least tell the user why a hint isn't needed for this exercise"
-            );
+            bail!("练习 `{name}` 的提示为空。请提供提示，或至少告诉学习者为什么这个练习不需要提示");
         }
 
         if !names.insert(name) {
-            bail!("The exercise name `{name}` is duplicated. Exercise names must all be unique");
+            bail!("练习名称 `{name}` 重复。所有练习名称必须唯一");
         }
 
         let path = exercise_info.path();
@@ -100,21 +96,21 @@ fn check_info_file_exercises(info_file: &InfoFile) -> Result<HashSet<PathBuf>> {
         OpenOptions::new()
             .read(true)
             .open(&path)
-            .with_context(|| format!("Failed to open the file {path}"))?
+            .with_context(|| format!("打开文件 {path} 失败"))?
             .read_to_string(&mut file_buf)
-            .with_context(|| format!("Failed to read the file {path}"))?;
+            .with_context(|| format!("读取文件 {path} 失败"))?;
 
         if !file_buf.contains("fn main()") {
             bail!(
-                "The `main` function is missing in the file `{path}`.\n\
-                 Create at least an empty `main` function to avoid language server errors"
+                "文件 `{path}` 缺少 `main` 函数。\n\
+                 请至少创建一个空的 `main` 函数，以避免语言服务器报错"
             );
         }
 
         if !file_buf.contains("// TODO") {
             bail!(
-                "Didn't find any `// TODO` comment in the file `{path}`.\n\
-                 You need to have at least one such comment to guide the user."
+                "在文件 `{path}` 中没有找到 `// TODO` 注释。\n\
+                 至少需要一条这样的注释来引导学习者。"
             );
         }
 
@@ -122,12 +118,12 @@ fn check_info_file_exercises(info_file: &InfoFile) -> Result<HashSet<PathBuf>> {
         if exercise_info.test {
             if !contains_tests {
                 bail!(
-                    "The file `{path}` doesn't contain any tests. If you don't want to add tests to this exercise, set `test = false` for this exercise in the `info.toml` file"
+                    "文件 `{path}` 不包含任何测试。如果你不想为此练习添加测试，请在 `info.toml` 中将该练习设置为 `test = false`"
                 );
             }
         } else if contains_tests {
             bail!(
-                "The file `{path}` contains tests annotated with `#[test]` but the exercise `{name}` has `test = false` in the `info.toml` file"
+                "文件 `{path}` 包含使用 `#[test]` 标注的测试，但练习 `{name}` 在 `info.toml` 中设置了 `test = false`"
             );
         }
 
@@ -145,13 +141,13 @@ fn check_info_file_exercises(info_file: &InfoFile) -> Result<HashSet<PathBuf>> {
 fn check_unexpected_files(dir: &str, allowed_rust_files: &HashSet<PathBuf>) -> Result<()> {
     let unexpected_file = |path: &Path| {
         anyhow!(
-            "Found the file `{}`. Only `README.md` and Rust files related to an exercise in `info.toml` are allowed in the `{dir}` directory",
+            "发现文件 `{}`。`{dir}` 目录中只允许存在 `README.md` 和 `info.toml` 中练习对应的 Rust 文件",
             path.display()
         )
     };
 
-    for entry in read_dir(dir).with_context(|| format!("Failed to open the `{dir}` directory"))? {
-        let entry = entry.with_context(|| format!("Failed to read the `{dir}` directory"))?;
+    for entry in read_dir(dir).with_context(|| format!("打开 `{dir}` 目录失败"))? {
+        let entry = entry.with_context(|| format!("读取 `{dir}` 目录失败"))?;
 
         if entry.file_type().unwrap().is_file() {
             let path = entry.path();
@@ -168,16 +164,15 @@ fn check_unexpected_files(dir: &str, allowed_rust_files: &HashSet<PathBuf>) -> R
         }
 
         let dir_path = entry.path();
-        for entry in read_dir(&dir_path)
-            .with_context(|| format!("Failed to open the directory {}", dir_path.display()))?
+        for entry in
+            read_dir(&dir_path).with_context(|| format!("打开目录 {} 失败", dir_path.display()))?
         {
-            let entry = entry
-                .with_context(|| format!("Failed to read the directory {}", dir_path.display()))?;
+            let entry = entry.with_context(|| format!("读取目录 {} 失败", dir_path.display()))?;
             let path = entry.path();
 
             if !entry.file_type().unwrap().is_file() {
                 bail!(
-                    "Found `{}` but expected only files. Only one level of exercise nesting is allowed",
+                    "发现 `{}`，但此处应只有文件。练习目录最多只能嵌套一层",
                     path.display()
                 );
             }
@@ -201,7 +196,7 @@ fn check_exercises_unsolved(
     cmd_runner: &'static CmdRunner,
 ) -> Result<()> {
     let mut stdout = io::stdout().lock();
-    stdout.write_all(b"Running all exercises to check that they aren't already solved...\n")?;
+    stdout.write_all("正在运行所有练习，以检查它们是否已经解出……\n".as_bytes())?;
 
     let handles = info_file
         .exercises
@@ -218,19 +213,19 @@ fn check_exercises_unsolved(
             )
         })
         .collect::<Result<Vec<_>, _>>()
-        .context("Failed to spawn a thread to check if an exercise is already solved")?;
+        .context("创建用于检查练习是否已经解出的线程失败")?;
 
     let mut progress_counter = ProgressCounter::new(&mut stdout, handles.len())?;
 
     for (exercise_name, handle) in handles {
         let Ok(result) = handle.join() else {
-            bail!("Panic while trying to run the exercise {exercise_name}");
+            bail!("运行练习 {exercise_name} 时发生 panic");
         };
 
         match result {
             Ok(true) => {
                 bail!(
-                    "The exercise {exercise_name} is already solved.\n\
+                    "练习 {exercise_name} 已经解出。\n\
                      {SKIP_CHECK_UNSOLVED_HINT}",
                 )
             }
@@ -247,19 +242,19 @@ fn check_exercises_unsolved(
 fn check_exercises(info_file: &'static InfoFile, cmd_runner: &'static CmdRunner) -> Result<()> {
     match info_file.format_version.cmp(&CURRENT_FORMAT_VERSION) {
         Ordering::Less => bail!(
-            "`format_version` < {CURRENT_FORMAT_VERSION} (supported version)\n\
-             Please migrate to the latest format version"
+            "`format_version` < {CURRENT_FORMAT_VERSION}（支持的版本）\n\
+             请迁移到最新格式版本"
         ),
         Ordering::Greater => bail!(
-            "`format_version` > {CURRENT_FORMAT_VERSION} (supported version)\n\
-             Try updating the Rustlings program"
+            "`format_version` > {CURRENT_FORMAT_VERSION}（支持的版本）\n\
+             请尝试更新 Rustlings 程序"
         ),
         Ordering::Equal => (),
     }
 
     let handle = thread::Builder::new()
         .spawn(move || check_exercises_unsolved(info_file, cmd_runner))
-        .context("Failed to spawn a thread to check if any exercise is already solved")?;
+        .context("创建用于检查练习是否已经解出的线程失败")?;
 
     let info_file_paths = check_info_file_exercises(info_file)?;
     check_unexpected_files("exercises", &info_file_paths)?;
@@ -280,7 +275,7 @@ fn check_solutions(
     cmd_runner: &'static CmdRunner,
 ) -> Result<()> {
     let mut stdout = io::stdout().lock();
-    stdout.write_all(b"Running all solutions...\n")?;
+    stdout.write_all("正在运行所有解答……\n".as_bytes())?;
 
     let handles = info_file
         .exercises
@@ -291,7 +286,7 @@ fn check_solutions(
                 if !Path::new(&sol_path).exists() {
                     if require_solutions {
                         return SolutionCheck::Err(anyhow!(
-                            "The solution of the exercise {} is missing",
+                            "练习 {} 的解答缺失",
                             exercise_info.name,
                         ));
                     }
@@ -308,7 +303,7 @@ fn check_solutions(
             })
         })
         .collect::<Result<Vec<_>, _>>()
-        .context("Failed to spawn a thread to check a solution")?;
+        .context("创建用于检查解答的线程失败")?;
 
     let mut sol_paths = HashSet::with_capacity(info_file.exercises.len());
     let mut fmt_cmd = Command::new("rustfmt");
@@ -324,10 +319,7 @@ fn check_solutions(
 
     for (exercise_info, handle) in info_file.exercises.iter().zip(handles) {
         let Ok(check_result) = handle.join() else {
-            bail!(
-                "Panic while trying to run the solution of the exercise {}",
-                exercise_info.name,
-            );
+            bail!("运行练习 {} 的解答时发生 panic", exercise_info.name,);
         };
 
         match check_result {
@@ -339,10 +331,7 @@ fn check_solutions(
             SolutionCheck::RunFailure { output } => {
                 drop(progress_counter);
                 stdout.write_all(&output)?;
-                bail!(
-                    "Running the solution of the exercise {} failed with the error above",
-                    exercise_info.name,
-                );
+                bail!("运行练习 {} 的解答失败，错误信息见上方", exercise_info.name,);
             }
             SolutionCheck::Err(e) => return Err(e),
         }
@@ -353,17 +342,15 @@ fn check_solutions(
     let n_solutions = sol_paths.len();
     let handle = thread::Builder::new()
         .spawn(move || check_unexpected_files("solutions", &sol_paths))
-        .context(
-            "Failed to spawn a thread to check for unexpected files in the solutions directory",
-        )?;
+        .context("创建用于检查 solutions 目录中异常文件的线程失败")?;
 
     if n_solutions > 0
         && !fmt_cmd
             .status()
-            .context("Failed to run `rustfmt` on all solution files")?
+            .context("对所有解答文件运行 `rustfmt` 失败")?
             .success()
     {
-        bail!("Some solutions aren't formatted. Run `rustfmt` on them");
+        bail!("部分解答未格式化。请对它们运行 `rustfmt`");
     }
 
     handle.join().unwrap()
@@ -373,7 +360,7 @@ pub fn check(require_solutions: bool) -> Result<()> {
     let info_file = InfoFile::parse()?;
 
     if info_file.exercises.len() > MAX_N_EXERCISES {
-        bail!("The maximum number of exercises is {MAX_N_EXERCISES}");
+        bail!("练习数量上限为 {MAX_N_EXERCISES}");
     }
 
     if cfg!(debug_assertions) {
@@ -390,9 +377,9 @@ pub fn check(require_solutions: bool) -> Result<()> {
     check_exercises(info_file, cmd_runner)?;
     check_solutions(require_solutions, info_file, cmd_runner)?;
 
-    println!("Everything looks fine!");
+    println!("检查通过！");
 
     Ok(())
 }
 
-const SKIP_CHECK_UNSOLVED_HINT: &str = "If this is an introduction exercise that is intended to be already solved, add `skip_check_unsolved = true` to the exercise's metadata in the `info.toml` file";
+const SKIP_CHECK_UNSOLVED_HINT: &str = "如果这是一个设计为初始即已解出的入门练习，请在 `info.toml` 的练习元数据中添加 `skip_check_unsolved = true`";

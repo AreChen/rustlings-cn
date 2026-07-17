@@ -24,17 +24,17 @@ pub fn run(app_state: &mut AppState) -> Result<ExitCode> {
     if !success {
         app_state.set_pending(app_state.current_exercise_ind())?;
 
-        stdout.write_all(b"Ran ")?;
+        stdout.write_all("已运行 ".as_bytes())?;
         app_state
             .current_exercise()
             .terminal_file_link(&mut stdout, app_state.emit_file_links())?;
-        stdout.write_all(b" with errors\n")?;
+        stdout.write_all("，但出现错误\n".as_bytes())?;
 
         return Ok(ExitCode::FAILURE);
     }
 
     stdout.queue(SetForegroundColor(Color::Green))?;
-    stdout.write_all("✓ Successfully ran ".as_bytes())?;
+    stdout.write_all("✓ 成功运行 ".as_bytes())?;
     stdout.write_all(exercise.path.as_bytes())?;
     stdout.queue(ResetColor)?;
     stdout.write_all(b"\n")?;
@@ -47,7 +47,7 @@ pub fn run(app_state: &mut AppState) -> Result<ExitCode> {
 
     match app_state.done_current_exercise::<false>(&mut stdout)? {
         ExercisesProgress::NewPending | ExercisesProgress::CurrentPending => {
-            stdout.write_all(b"Next exercise: ")?;
+            stdout.write_all("下一个练习：".as_bytes())?;
             app_state
                 .current_exercise()
                 .terminal_file_link(&mut stdout, app_state.emit_file_links())?;

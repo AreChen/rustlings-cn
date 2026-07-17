@@ -1,32 +1,31 @@
-// Structs contain data, but can also have logic. In this exercise, we have
-// defined the `Fireworks` struct and a couple of functions that work with it.
-// Turn these free-standing functions into methods and associated functions
-// to express that relationship more clearly in the code.
+// 结构体包含数据，也可以包含逻辑。在本练习中，我们定义了 `Fireworks`
+// 结构体以及与它配合使用的几个函数。请将这些独立函数改为方法和关联函数，
+// 以便在代码中更清晰地表达它们之间的关系。
 
-#![deny(clippy::use_self)] // practice using the `Self` type
+#![deny(clippy::use_self)] // 练习使用 `Self` 类型
 
 #[derive(Debug)]
 struct Fireworks {
     rockets: usize,
 }
 
-// TODO: Turn this function into an associated function on `Fireworks`.
+// TODO: 将这个函数改为 `Fireworks` 的关联函数。
 fn new_fireworks() -> Fireworks {
     Fireworks { rockets: 0 }
 }
 
-// TODO: Turn this function into a method on `Fireworks`.
+// TODO: 将这个函数改为 `Fireworks` 的方法。
 fn add_rockets(fireworks: &mut Fireworks, rockets: usize) {
     fireworks.rockets += rockets
 }
 
-// TODO: Turn this function into a method on `Fireworks`.
+// TODO: 将这个函数改为 `Fireworks` 的方法。
 fn start(fireworks: Fireworks) -> String {
     "🚀".repeat(fireworks.rockets)
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]
@@ -44,8 +43,7 @@ mod tests {
 
         let mut f = Fireworks::new();
         f.add_rockets(7);
-        // We don't use method syntax in the last test to ensure the `start`
-        // function takes ownership of the fireworks.
+        // 最后一个测试不使用方法语法，以确保 `start` 函数取得烟花的所有权。
         assert_eq!(Fireworks::start(f), "🚀🚀🚀🚀🚀🚀🚀");
     }
 }

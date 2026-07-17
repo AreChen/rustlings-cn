@@ -1,21 +1,19 @@
-// This is a quiz for the following sections:
-// - Strings
+// 本测验涵盖以下章节：
+// - 字符串
 // - Vecs
-// - Move semantics
-// - Modules
-// - Enums
+// - 移动语义
+// - 模块
+// - 枚举
 //
-// Let's build a little machine in the form of a function. As input, we're going
-// to give a list of strings and commands. These commands determine what action
-// is going to be applied to the string. It can either be:
-// - Uppercase the string
-// - Trim the string
-// - Append "bar" to the string a specified amount of times
+// 我们来用函数构建一个小机器。输入是一组字符串和命令，这些命令决定对字符串
+// 执行什么操作。操作可以是：
+// - 将字符串转换为大写
+// - 修剪字符串
+// - 将 "bar" 追加到字符串末尾指定次数
 //
-// The exact form of this will be:
-// - The input is going to be a Vector of 2-length tuples,
-//   the first element is the string, the second one is the command.
-// - The output element is going to be a vector of strings.
+// 具体形式如下：
+// - 输入是一个由二元组组成的 Vector，第一个元素是字符串，第二个元素是命令。
+// - 输出是一个字符串向量。
 
 enum Command {
     Uppercase,
@@ -26,17 +24,17 @@ enum Command {
 mod my_module {
     use super::Command;
 
-    // TODO: Complete the function as described above.
+    // TODO: 按照上面的描述完成函数。
     // pub fn transformer(input: ???) -> ??? { ??? }
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]
 mod tests {
-    // TODO: What do we need to import to have `transformer` in scope?
+    // TODO: 需要导入什么才能让 `transformer` 位于当前作用域？
     // use ???;
     use super::Command;
 

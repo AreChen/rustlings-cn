@@ -1,19 +1,20 @@
-# Traits
+# Trait（特征）
 
-A trait is a collection of methods.
+trait 是一组方法的集合。
 
-Data types can implement traits. To do so, the methods making up the trait are defined for the data type. For example, the `String` data type implements the `From<&str>` trait. This allows a user to write `String::from("hello")`.
+数据类型可以实现 trait。为此，需要为数据类型定义组成该 trait 的方法。
+例如，`String` 数据类型实现了 `From<&str>` trait，因此可以写出 `String::from("hello")`。
 
-In this way, traits are somewhat similar to Java interfaces and C++ abstract classes.
+从这个角度看，trait 与 Java 接口和 C++ 抽象类有些相似。
 
-Some additional common Rust traits include:
+Rust 中还有一些常见的 trait：
 
-- `Clone` (the `clone` method)
-- `Display` (which allows formatted display via `{}`)
-- `Debug` (which allows formatted display via `{:?}`)
+- `Clone`（`clone` 方法）
+- `Display`（允许通过 `{}` 进行格式化显示）
+- `Debug`（允许通过 `{:?}` 进行格式化显示）
 
-Because traits indicate shared behavior between data types, they are useful when writing generics.
+由于 trait 表示数据类型之间的共享行为，因此编写泛型时非常有用。
 
-## Further information
+## 延伸阅读
 
-- [Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+- [Trait](https://doc.rust-lang.org/book/ch10-02-traits.html)

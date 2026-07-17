@@ -3,8 +3,8 @@ fn main() {
     let x;
 
     if x == 10 {
-        println!("x is ten!");
+        println!("x 等于 10！");
     } else {
-        println!("x is not ten!");
+        println!("x 不等于 10！");
     }
 }

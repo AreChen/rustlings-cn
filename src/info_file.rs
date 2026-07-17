@@ -95,18 +95,17 @@ impl InfoFile {
                 // Leaking is fine since the info file is used until the end of the program.
                 let file_content =
                     String::from_utf8(file_content.into_iter().filter(|c| *c != b'\r').collect())
-                        .context("Failed to parse `info.toml` as UTF8")?
+                        .context("无法将 `info.toml` 解析为 UTF-8")?
                         .leak();
-                toml::de::from_str::<Self>(file_content)
-                    .context("Failed to parse the `info.toml` file")?
+                toml::de::from_str::<Self>(file_content).context("无法解析 `info.toml` 文件")?
             }
             Err(e) => {
                 if e.kind() == ErrorKind::NotFound {
                     return toml::de::from_str(EMBEDDED_FILES.info_file)
-                        .context("Failed to parse the embedded `info.toml` file");
+                        .context("无法解析内置的 `info.toml` 文件");
                 }
 
-                return Err(Error::from(e).context("Failed to read the `info.toml` file"));
+                return Err(Error::from(e).context("读取 `info.toml` 文件失败"));
             }
         };
 
@@ -118,5 +117,5 @@ impl InfoFile {
     }
 }
 
-const NO_EXERCISES_ERR: &str = "There are no exercises yet!
-Add at least one exercise before testing.";
+const NO_EXERCISES_ERR: &str = "目前还没有练习！
+请至少添加一个练习后再进行检查。";

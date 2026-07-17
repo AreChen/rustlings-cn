@@ -1,11 +1,11 @@
-// TODO: Fix the compiler error by adding one or two characters.
+// TODO: 添加一两个字符，修复编译器错误。
 #[rustfmt::skip]
 macro_rules! my_macro {
     () => {
-        println!("Check out my macro!");
+        println!("看看我的宏！");
     }
     ($val:expr) => {
-        println!("Look at this other macro: {}", $val);
+        println!("看看另一个宏：{}", $val);
     }
 }
 

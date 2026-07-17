@@ -1,7 +1,7 @@
-# Tests
+# 测试
 
-Going out of order from the book to cover tests -- many of the following exercises will ask you to make tests pass!
+为了介绍测试，本节顺序与书中略有不同——下面的许多练习都会要求你让测试通过！
 
-## Further information
+## 延伸阅读
 
-- [Writing Tests](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)
+- [编写测试](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)

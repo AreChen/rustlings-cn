@@ -8,21 +8,21 @@ mod update;
 
 #[derive(Subcommand)]
 pub enum DevCommand {
-    /// Create a new project for community exercises
+    /// 为社区练习创建新项目
     New {
-        /// The path to create the project in
+        /// 创建项目的路径
         path: PathBuf,
-        /// Don't try to initialize a Git repository in the project directory
+        /// 不要在项目目录中初始化 Git 仓库
         #[arg(long)]
         no_git: bool,
     },
-    /// Run checks on the exercises
+    /// 检查练习
     Check {
-        /// Require that every exercise has a solution
+        /// 要求每个练习都有解答
         #[arg(short, long)]
         require_solutions: bool,
     },
-    /// Update the `Cargo.toml` file for the exercises
+    /// 更新练习的 `Cargo.toml` 文件
     Update,
 }
 
@@ -31,7 +31,7 @@ impl DevCommand {
         match self {
             Self::New { path, no_git } => {
                 if cfg!(debug_assertions) {
-                    bail!("Disabled in the debug build");
+                    bail!("调试构建中禁用此命令");
                 }
 
                 new::new(&path, no_git).context(INIT_ERR)
@@ -42,5 +42,5 @@ impl DevCommand {
     }
 }
 
-const INIT_ERR: &str = "Initialization failed.
-After resolving the issue, delete the `rustlings` directory (if it was created) and try again";
+const INIT_ERR: &str = "初始化失败。
+解决问题后，请删除 `rustlings` 目录（如果已经创建），然后重试";

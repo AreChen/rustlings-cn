@@ -78,9 +78,7 @@ impl AppState {
             .write(true)
             .truncate(false)
             .open(STATE_FILE_NAME)
-            .with_context(|| {
-                format!("Failed to open or create the state file {STATE_FILE_NAME}")
-            })?;
+            .with_context(|| format!("无法打开或创建状态文件 {STATE_FILE_NAME}"))?;
 
         let dir_canonical_path = term::canonicalize("exercises");
         let mut exercises = exercise_infos
@@ -238,13 +236,13 @@ impl AppState {
 
         self.state_file
             .rewind()
-            .with_context(|| format!("Failed to rewind the state file {STATE_FILE_NAME}"))?;
+            .with_context(|| format!("无法回到状态文件 {STATE_FILE_NAME} 的开头"))?;
         self.state_file
             .set_len(0)
-            .with_context(|| format!("Failed to truncate the state file {STATE_FILE_NAME}"))?;
+            .with_context(|| format!("无法截断状态文件 {STATE_FILE_NAME}"))?;
         self.state_file
             .write_all(&self.file_buf)
-            .with_context(|| format!("Failed to write the state file {STATE_FILE_NAME}"))?;
+            .with_context(|| format!("无法写入状态文件 {STATE_FILE_NAME}"))?;
 
         Ok(())
     }
@@ -270,7 +268,7 @@ impl AppState {
             .exercises
             .iter()
             .position(|exercise| exercise.name == name)
-            .with_context(|| format!("No exercise found for '{name}'!"))?;
+            .with_context(|| format!("找不到名为“{name}”的练习！"))?;
 
         self.write()
     }
@@ -312,7 +310,7 @@ impl AppState {
         if self.official_exercises {
             return EMBEDDED_FILES
                 .write_exercise_to_disk(exercise_ind, path)
-                .with_context(|| format!("Failed to reset the exercise {path}"));
+                .with_context(|| format!("重置练习 {path} 失败"));
         }
 
         let output = Command::new("git")
@@ -323,11 +321,11 @@ impl AppState {
             .stdin(Stdio::null())
             .stdout(Stdio::null())
             .output()
-            .with_context(|| format!("Failed to run `git stash push -- {path}`"))?;
+            .with_context(|| format!("运行 `git stash push -- {path}` 失败"))?;
 
         if !output.status.success() {
             bail!(
-                "`git stash push -- {path}` didn't run successfully: {}",
+                "`git stash push -- {path}` 执行失败：{}",
                 String::from_utf8_lossy(&output.stderr),
             );
         }
@@ -399,9 +397,7 @@ impl AppState {
     }
 
     fn check_all_exercises_impl(&mut self, stdout: &mut StdoutLock) -> Result<Option<usize>> {
-        let term_width = terminal::size()
-            .context("Failed to get the terminal size")?
-            .0;
+        let term_width = terminal::size().context("无法获取终端尺寸")?.0;
         let mut progress_visualizer = CheckProgressVisualizer::build(stdout, term_width)?;
 
         let next_exercise_ind = AtomicUsize::new(0);
@@ -447,7 +443,7 @@ impl AppState {
                             }
                         }
                     })
-                    .context("Failed to spawn a thread to check all exercises")?;
+                    .context("无法创建用于检查所有练习的线程")?;
             }
 
             // Drop this sender to detect when the last thread is done.
@@ -581,8 +577,10 @@ impl AppState {
     }
 }
 
-const BAD_INDEX_ERR: &str = "The current exercise index is higher than the number of exercises";
+const BAD_INDEX_ERR: &str = "当前练习索引大于练习总数";
+// translation: preserve state-file format header; existing state files depend on this exact prefix
 const STATE_FILE_HEADER: &[u8] = b"DON'T EDIT THIS FILE!\n\n";
+// translation: preserve ASCII art layout; changing the text would break the fixed-width frame
 const FINISH_LINE: &str = "+----------------------------------------------------+
 |          You made it to the finish line!           |
 +--------------------------  ------------------------+

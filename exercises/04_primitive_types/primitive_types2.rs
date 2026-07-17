@@ -4,11 +4,11 @@ fn main() {
     // 注意这里使用的是 _单引号_，它们不同于你之前看到的双引号。
     let my_first_initial = 'C';
     if my_first_initial.is_alphabetic() {
-        println!("Alphabetical!");
+        println!("这是字母！");
     } else if my_first_initial.is_numeric() {
-        println!("Numerical!");
+        println!("这是数字！");
     } else {
-        println!("Neither alphabetic nor numeric!");
+        println!("既不是字母，也不是数字！");
     }
 
     // TODO: 仿照前面的例子，在下面声明一个名为 `your_character` 的变量，值为你喜欢的字符。
@@ -16,10 +16,10 @@ fn main() {
     // let your_character = '';
 
     if your_character.is_alphabetic() {
-        println!("Alphabetical!");
+        println!("这是字母！");
     } else if your_character.is_numeric() {
-        println!("Numerical!");
+        println!("这是数字！");
     } else {
-        println!("Neither alphabetic nor numeric!");
+        println!("既不是字母，也不是数字！");
     }
 }

@@ -1,6 +1,5 @@
-// Building on the last exercise, we want all of the threads to complete their
-// work. But this time, the spawned threads need to be in charge of updating a
-// shared value: `JobStatus.jobs_done`
+// 在上一道练习的基础上，我们希望所有线程完成各自的工作。
+// 但这一次，需要由生成的线程负责更新共享值：`JobStatus.jobs_done`。
 
 use std::{sync::Arc, thread, time::Duration};
 
@@ -9,7 +8,7 @@ struct JobStatus {
 }
 
 fn main() {
-    // TODO: `Arc` isn't enough if you want a **mutable** shared state.
+    // TODO: 如果需要**可变的**共享状态，仅使用 `Arc` 是不够的。
     let status = Arc::new(JobStatus { jobs_done: 0 });
 
     let mut handles = Vec::new();
@@ -18,17 +17,17 @@ fn main() {
         let handle = thread::spawn(move || {
             thread::sleep(Duration::from_millis(250));
 
-            // TODO: You must take an action before you update a shared value.
+            // TODO: 在更新共享值之前，必须先采取一个动作。
             status_shared.jobs_done += 1;
         });
         handles.push(handle);
     }
 
-    // Waiting for all jobs to complete.
+    // 等待所有任务完成。
     for handle in handles {
         handle.join().unwrap();
     }
 
-    // TODO: Print the value of `JobStatus.jobs_done`.
-    println!("Jobs done: {}", todo!());
+    // TODO: 打印 `JobStatus.jobs_done` 的值。
+    println!("已完成的任务数：{}", todo!());
 }

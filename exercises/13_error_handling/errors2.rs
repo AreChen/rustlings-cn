@@ -1,18 +1,13 @@
-// Say we're writing a game where you can buy items with tokens. All items cost
-// 5 tokens, and whenever you purchase items there is a processing fee of 1
-// token. A player of the game will type in how many items they want to buy, and
-// the `total_cost` function will calculate the total cost of the items. Since
-// the player typed in the quantity, we get it as a string. They might have
-// typed anything, not just numbers!
+// 假设我们正在编写一个可以用代币购买物品的游戏。每件物品售价 5 个代币，
+// 每次购买还会收取 1 个代币的处理费。玩家会输入想购买的物品数量，
+// `total_cost` 函数将计算物品的总价。由于玩家输入的是数量字符串，
+// 他们可能输入任何内容，而不只是数字！
 //
-// Right now, this function isn't handling the error case at all. What we want
-// to do is: If we call the `total_cost` function on a string that is not a
-// number, that function will return a `ParseIntError`. In that case, we want to
-// immediately return that error from our function and not try to multiply and
-// add.
+// 现在这个函数完全没有处理错误情况。我们希望这样做：如果对非数字字符串
+// 调用 `total_cost`，该函数会返回 `ParseIntError`。此时，我们应立即从当前
+// 函数返回该错误，而不是继续做乘法和加法。
 //
-// There are at least two ways to implement this that are both correct. But one
-// is a lot shorter!
+// 至少有两种正确的实现方式，不过其中一种要短得多！
 
 use std::num::ParseIntError;
 
@@ -20,14 +15,14 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
 
-    // TODO: Handle the error case as described above.
+    // TODO: 按照上面的描述处理错误情况。
     let qty = item_quantity.parse::<i32>();
 
     Ok(qty * cost_per_item + processing_fee)
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]

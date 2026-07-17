@@ -47,9 +47,7 @@ impl<'a> WatchState<'a> {
         watch_event_sender: Sender<WatchEvent>,
         manual_run: bool,
     ) -> Result<Self> {
-        let term_width = terminal::size()
-            .context("Failed to get the terminal size")?
-            .0;
+        let term_width = terminal::size().context("获取终端大小失败")?.0;
 
         let (terminal_event_unpause_sender, terminal_event_unpause_receiver) = sync_channel(0);
 
@@ -61,7 +59,7 @@ impl<'a> WatchState<'a> {
                     manual_run,
                 );
             })
-            .context("Failed to spawn a thread to handle terminal events")?;
+            .context("创建用于处理终端事件的线程失败")?;
 
         Ok(Self {
             app_state,
@@ -80,7 +78,7 @@ impl<'a> WatchState<'a> {
 
         writeln!(
             stdout,
-            "\nChecking the exercise `{}`. Please wait…",
+            "\n正在检查练习 `{}`，请稍候……",
             self.app_state.current_exercise().name,
         )?;
 
@@ -116,9 +114,9 @@ impl<'a> WatchState<'a> {
     pub fn reset_exercise(&mut self, stdout: &mut StdoutLock) -> Result<()> {
         clear_terminal(stdout)?;
 
-        stdout.write_all(b"Resetting will undo all your changes to the file ")?;
+        stdout.write_all("重置将撤销你对文件 ".as_bytes())?;
         stdout.write_all(self.app_state.current_exercise().path.as_bytes())?;
-        stdout.write_all(b"\nReset (y/n)? ")?;
+        stdout.write_all("\n确认重置（y/n）？ ".as_bytes())?;
         stdout.flush()?;
 
         {
@@ -127,7 +125,7 @@ impl<'a> WatchState<'a> {
             loop {
                 stdin
                     .read_exact(&mut answer)
-                    .context("Failed to read the user's input")?;
+                    .context("读取学习者输入失败")?;
 
                 match answer[0] {
                     b'y' | b'Y' => {
@@ -181,7 +179,7 @@ impl<'a> WatchState<'a> {
             stdout.queue(ResetColor)?;
             stdout.write_all(b":")?;
             stdout.queue(SetAttribute(Attribute::Underlined))?;
-            stdout.write_all(b"next")?;
+            stdout.write_all("下一题".as_bytes())?;
             stdout.queue(ResetColor)?;
             stdout.write_all(b" / ")?;
         }
@@ -194,17 +192,17 @@ impl<'a> WatchState<'a> {
         };
 
         if self.manual_run {
-            show_key(b'r', b":run / ")?;
+            show_key(b'r', "：运行 / ".as_bytes())?;
         }
 
         if !self.show_hint {
-            show_key(b'h', b":hint / ")?;
+            show_key(b'h', "：提示 / ".as_bytes())?;
         }
 
-        show_key(b'l', b":list / ")?;
-        show_key(b'c', b":check all / ")?;
-        show_key(b'x', b":reset / ")?;
-        show_key(b'q', b":quit ? ")?;
+        show_key(b'l', "：列表 / ".as_bytes())?;
+        show_key(b'c', "：检查全部 / ".as_bytes())?;
+        show_key(b'x', "：重置 / ".as_bytes())?;
+        show_key(b'q', "：退出？ ".as_bytes())?;
 
         stdout.flush()
     }
@@ -220,7 +218,7 @@ impl<'a> WatchState<'a> {
             stdout
                 .queue(SetAttributes(HEADING_ATTRIBUTES))?
                 .queue(SetForegroundColor(Color::Cyan))?;
-            stdout.write_all(b"Hint")?;
+            stdout.write_all("提示".as_bytes())?;
             stdout.queue(ResetColor)?;
             stdout.write_all(b"\n")?;
 
@@ -232,7 +230,7 @@ impl<'a> WatchState<'a> {
             stdout
                 .queue(SetAttribute(Attribute::Bold))?
                 .queue(SetForegroundColor(Color::Green))?;
-            stdout.write_all("Exercise done ✓".as_bytes())?;
+            stdout.write_all("练习已完成 ✓".as_bytes())?;
             stdout.queue(ResetColor)?;
             stdout.write_all(b"\n")?;
 
@@ -240,10 +238,7 @@ impl<'a> WatchState<'a> {
                 solution_link_line(stdout, solution_path, self.app_state.emit_file_links())?;
             }
 
-            stdout.write_all(
-                "When done experimenting, enter `n` to move on to the next exercise 🦀\n\n"
-                    .as_bytes(),
-            )?;
+            stdout.write_all("试验完成后，输入 `n` 继续下一个练习 🦀\n\n".as_bytes())?;
         }
 
         progress_bar(
@@ -253,7 +248,7 @@ impl<'a> WatchState<'a> {
             self.term_width,
         )?;
 
-        stdout.write_all(b"\nCurrent exercise: ")?;
+        stdout.write_all("\n当前练习：".as_bytes())?;
         self.app_state
             .current_exercise()
             .terminal_file_link(stdout, self.app_state.emit_file_links())?;

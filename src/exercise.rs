@@ -19,9 +19,9 @@ pub fn solution_link_line(
     emit_file_links: bool,
 ) -> io::Result<()> {
     stdout.queue(SetAttribute(Attribute::Bold))?;
-    stdout.write_all(b"Solution")?;
+    stdout.write_all("解答".as_bytes())?;
     stdout.queue(ResetColor)?;
-    stdout.write_all(b" for comparison: ")?;
+    stdout.write_all(" 用于对比：".as_bytes())?;
     file_path(stdout, Color::Cyan, |writer| {
         if emit_file_links && let Some(canonical_path) = term::canonicalize(solution_path) {
             terminal_file_link(writer, solution_path, &canonical_path)
@@ -41,7 +41,7 @@ fn run_bin(
 ) -> Result<bool> {
     if let Some(output) = output.as_deref_mut() {
         write_ansi(output, SetAttribute(Attribute::Underlined));
-        output.extend_from_slice(b"Output");
+        output.extend_from_slice("输出".as_bytes());
         write_ansi(output, ResetColor);
         output.push(b'\n');
     }
@@ -56,7 +56,7 @@ fn run_bin(
         // leaves the user confused about why the exercise isn't done yet.
         write_ansi(output, SetAttribute(Attribute::Bold));
         write_ansi(output, SetForegroundColor(Color::Red));
-        output.extend_from_slice(b"The exercise didn't run successfully (nonzero exit code)");
+        output.extend_from_slice("练习未成功运行（退出码非零）".as_bytes());
         write_ansi(output, ResetColor);
         output.push(b'\n');
     }

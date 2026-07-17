@@ -1,14 +1,12 @@
-// A list of scores (one per line) of a soccer match is given. Each line is of
-// the form "<team_1_name>,<team_2_name>,<team_1_goals>,<team_2_goals>"
-// Example: "England,France,4,2" (England scored 4 goals, France 2).
+// 给出一场足球比赛的比分列表（每行一条）。每行的格式为
+// 格式为 "<team_1_name>,<team_2_name>,<team_1_goals>,<team_2_goals>"。
+// 例如："England,France,4,2"（England 进 4 球，France 进 2 球）。
 //
-// You have to build a table of scores containing the name of the team, the total
-// number of goals the team scored, and the total number of goals the team
-// conceded.
+// 你需要构建一个比分表，其中包含球队名称、球队进球总数和球队失球总数。
 
 use std::collections::HashMap;
 
-// A structure to store the goal details of a team.
+// 用于存储球队进球详情的结构体。
 #[derive(Default)]
 struct TeamScores {
     goals_scored: u8,
@@ -16,28 +14,27 @@ struct TeamScores {
 }
 
 fn build_score_table(results: &str) -> HashMap<&str, TeamScores> {
-    // The name of the team is the key and its associated struct is the value.
+    // 球队名称是键，与之关联的结构体是值。
     let mut scores = HashMap::<&str, TeamScores>::new();
 
     for line in results.lines() {
         let mut split_iterator = line.split(',');
-        // NOTE: We use `unwrap` because we haven't dealt with error handling yet.
+        // 注意：我们使用 `unwrap`，因为还没有学习错误处理。
         let team_1_name = split_iterator.next().unwrap();
         let team_2_name = split_iterator.next().unwrap();
         let team_1_score: u8 = split_iterator.next().unwrap().parse().unwrap();
         let team_2_score: u8 = split_iterator.next().unwrap().parse().unwrap();
 
-        // TODO: Populate the score table with the extracted details.
-        // Keep in mind that goals scored by team 1 will be the number of goals
-        // conceded by team 2. Similarly, goals scored by team 2 will be the
-        // number of goals conceded by team 1.
+        // TODO: 使用提取出的详情填充比分表。
+        // 注意：球队 1 的进球数就是球队 2 的失球数。同理，球队 2 的进球数
+        // 就是球队 1 的失球数。
     }
 
     scores
 }
 
 fn main() {
-    // You can optionally experiment here.
+    // 你可以选择在这里进行实验。
 }
 
 #[cfg(test)]

@@ -37,7 +37,7 @@ pub fn pane_open(pane_id: u32) -> Result<bool> {
     stdout.pop();
 
     let panes = serde_json::de::from_slice::<Vec<Pane>>(&stdout)
-        .context("Failed to parse the output of `zellij action list-panes -j`")?;
+        .context("无法解析命令 `zellij action list-panes -j` 的输出")?;
 
     Ok(panes.iter().any(|pane| pane.id == pane_id))
 }

@@ -1,6 +1,6 @@
-// Lifetimes are also needed when structs hold references.
+// 当结构体持有引用时，同样需要生命周期。
 
-// TODO: Fix the compiler errors about the struct.
+// TODO: 修复结构体相关的编译器错误。
 struct Book {
     author: &str,
     title: &str,
@@ -12,5 +12,5 @@ fn main() {
         title: "1984",
     };
 
-    println!("{} by {}", book.title, book.author);
+    println!("《{}》作者：{}", book.title, book.author);
 }

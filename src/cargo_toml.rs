@@ -13,13 +13,13 @@ pub const BINS_BUFFER_CAPACITY: usize = 1 << 14;
 pub fn bins_start_end_ind(cargo_toml: &str) -> Result<(usize, usize)> {
     let start_ind = cargo_toml
         .find("bin = [")
-        .context("Failed to find the start of the `bin` list (`bin = [`)")?
+        .context("无法找到 `bin` 列表的起始位置（`bin = [`）")?
         + 7;
     let end_ind = start_ind
         + cargo_toml
             .get(start_ind..)
             .and_then(|slice| slice.as_bytes().iter().position(|c| *c == b']'))
-            .context("Failed to find the end of the `bin` list (`]`)")?;
+            .context("无法找到 `bin` 列表的结束位置（`]`）")?;
 
     Ok((start_ind, end_ind))
 }

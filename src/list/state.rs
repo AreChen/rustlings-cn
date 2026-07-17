@@ -74,7 +74,7 @@ impl<'a> ListState<'a> {
         let n_rows_with_filter = app_state.exercises().len();
         let selected = app_state.current_exercise_ind();
 
-        let (width, height) = terminal::size().context("Failed to get the terminal size")?;
+        let (width, height) = terminal::size().context("获取终端大小失败")?;
         let scroll_state = ScrollState::new(n_rows_with_filter, Some(selected), 5);
 
         let mut slf = Self {
@@ -172,10 +172,10 @@ impl<'a> ListState<'a> {
 
             if exercise.done {
                 writer.stdout.queue(SetForegroundColor(Color::Green))?;
-                writer.write_ascii(b"DONE   ")?;
+                writer.write_str("已完成  ")?;
             } else {
                 writer.stdout.queue(SetForegroundColor(Color::Yellow))?;
-                writer.write_ascii(b"PENDING")?;
+                writer.write_str("待完成  ")?;
             }
             writer.stdout.queue(SetForegroundColor(Color::Reset))?;
             writer.write_ascii(b"  ")?;
@@ -205,9 +205,9 @@ impl<'a> ListState<'a> {
 
         // Header
         let mut writer = MaxLenWriter::new(stdout, self.term_width as usize);
-        writer.write_ascii(b"  Current  State    Name")?;
+        writer.write_str("  当前  状态    名称")?;
         writer.write_ascii(&self.name_col_padding[4..])?;
-        writer.write_ascii(b"Path")?;
+        writer.write_str("路径")?;
         next_ln(stdout)?;
 
         // Rows
@@ -241,23 +241,23 @@ impl<'a> ListState<'a> {
                     hotkey(&mut writer, b"j")?;
                     writer.write_str(" ↑/")?;
                     hotkey(&mut writer, b"k")?;
-                    writer.write_ascii(b" home/")?;
+                    writer.write_str(" 首页/")?;
                     hotkey(&mut writer, b"g")?;
-                    writer.write_ascii(b" end/")?;
+                    writer.write_str(" 末页/")?;
                     hotkey(&mut writer, b"G")?;
                     writer.write_str(" | ↩️/")?;
                     hotkey(&mut writer, b"c")?;
-                    writer.write_ascii(b"ontinue at | ")?;
+                    writer.write_str("继续到 | ")?;
                     hotkey(&mut writer, b"r")?;
-                    writer.write_ascii(b"eset exercise")?;
+                    writer.write_str("重置练习")?;
                     next_ln(stdout)?;
                     writer = MaxLenWriter::new(stdout, self.term_width as usize);
 
                     hotkey(&mut writer, b"s")?;
-                    writer.write_ascii(b"earch | filter ")?;
+                    writer.write_str("搜索 | 筛选 ")?;
                 } else {
                     // Nothing selected (and nothing shown), so only display filter and quit.
-                    writer.write_ascii(b"filter ")?;
+                    writer.write_str("筛选 ")?;
                 }
 
                 match self.filter {
@@ -268,35 +268,35 @@ impl<'a> ListState<'a> {
                             .stdout
                             .queue(SetForegroundColor(Color::Magenta))?
                             .queue(SetAttribute(Attribute::Underlined))?;
-                        writer.write_str("one")?;
+                        writer.write_str("已完成")?;
                         writer.stdout.queue(ResetColor)?;
                         writer.write_ascii(b"/")?;
                         hotkey(&mut writer, b"p")?;
-                        writer.write_ascii(b"ending")?;
+                        writer.write_str("待完成")?;
                     }
                     Filter::Pending => {
                         hotkey(&mut writer, b"d")?;
-                        writer.write_ascii(b"one/")?;
+                        writer.write_str("已完成/")?;
                         writer.stdout.queue(SetAttribute(Attribute::Underlined))?;
                         hotkey(&mut writer, b"p")?;
                         writer
                             .stdout
                             .queue(SetForegroundColor(Color::Magenta))?
                             .queue(SetAttribute(Attribute::Underlined))?;
-                        writer.write_ascii(b"ending")?;
+                        writer.write_str("待完成")?;
                         writer.stdout.queue(ResetColor)?;
                     }
                     Filter::None => {
                         hotkey(&mut writer, b"d")?;
-                        writer.write_ascii(b"one/")?;
+                        writer.write_str("已完成/")?;
                         hotkey(&mut writer, b"p")?;
-                        writer.write_ascii(b"ending")?;
+                        writer.write_str("待完成")?;
                     }
                 }
 
                 writer.write_ascii(b" | ")?;
                 hotkey(&mut writer, b"q")?;
-                writer.write_ascii(b"uit list")?;
+                writer.write_str("退出列表")?;
             } else {
                 writer.stdout.queue(SetForegroundColor(Color::Magenta))?;
                 writer.write_str(&self.message)?;
@@ -364,7 +364,7 @@ impl<'a> ListState<'a> {
                 .enumerate()
                 .filter(|(_, exercise)| exercise.done)
                 .nth(selected)
-                .context("Invalid selection index")
+                .context("选择索引无效")
                 .map(|(ind, _)| ind),
             Filter::Pending => self
                 .app_state
@@ -373,7 +373,7 @@ impl<'a> ListState<'a> {
                 .enumerate()
                 .filter(|(_, exercise)| !exercise.done)
                 .nth(selected)
-                .context("Invalid selection index")
+                .context("选择索引无效")
                 .map(|(ind, _)| ind),
             Filter::None => Ok(selected),
         }
@@ -381,23 +381,20 @@ impl<'a> ListState<'a> {
 
     pub fn reset_selected(&mut self) -> Result<()> {
         let Some(selected) = self.scroll_state.selected() else {
-            self.message.push_str("Nothing selected to reset!");
+            self.message.push_str("没有选中要重置的练习！");
             return Ok(());
         };
 
         let exercise_ind = self.selected_to_exercise_ind(selected)?;
         let exercise_name = self.app_state.reset_exercise_by_ind(exercise_ind)?;
-        write!(
-            self.message,
-            "The exercise `{exercise_name}` has been reset",
-        )?;
+        write!(self.message, "练习 `{exercise_name}` 已重置",)?;
         self.update_rows();
 
         Ok(())
     }
 
     pub fn apply_search_query(&mut self) {
-        self.message.push_str("search:");
+        self.message.push_str("搜索：");
         self.message.push_str(&self.search_query);
         self.message.push('|');
 
@@ -419,14 +416,14 @@ impl<'a> ListState<'a> {
 
         match ind {
             Some(exercise_ind) => self.scroll_state.set_selected(exercise_ind),
-            None => self.message.push_str(" (not found)"),
+            None => self.message.push_str("（未找到）"),
         }
     }
 
     // Return `true` if there was something to select.
     pub fn selected_to_current_exercise(&mut self) -> Result<bool> {
         let Some(selected) = self.scroll_state.selected() else {
-            self.message.push_str("Nothing selected to continue at!");
+            self.message.push_str("没有选中要继续的练习！");
             return Ok(false);
         };
 

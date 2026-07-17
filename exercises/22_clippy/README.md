@@ -1,10 +1,10 @@
-# Clippy
+# Clippy 工具
 
-The Clippy tool is a collection of lints to analyze your code so you can catch common mistakes and improve your Rust code.
+Clippy 工具是一组用于分析代码的 lint，可以帮助你发现常见错误并改进 Rust 代码。
 
-If you used the installation script for Rustlings, Clippy should be already installed.
-If not you can install it manually via `rustup component add clippy`.
+如果你使用 Rustlings 的安装脚本，Clippy 应该已经安装。
+如果没有，可以手动运行 `rustup component add clippy` 安装。
 
-## Further information
+## 延伸阅读
 
-- [GitHub Repository](https://github.com/rust-lang/rust-clippy).
+- [GitHub 仓库](https://github.com/rust-lang/rust-clippy)。

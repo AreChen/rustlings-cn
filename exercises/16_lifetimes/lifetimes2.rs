@@ -1,4 +1,4 @@
-// Don't change this function.
+// 不要修改这个函数。
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
@@ -8,7 +8,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 
 fn main() {
-    // TODO: Fix the compiler error by moving one line.
+    // TODO: 移动一行代码，修复编译器错误。
 
     let string1 = String::from("long string is long");
     let result;
@@ -16,5 +16,5 @@ fn main() {
         let string2 = String::from("xyz");
         result = longest(&string1, &string2);
     }
-    println!("The longest string is '{result}'");
+    println!("最长的字符串是“{result}”");
 }

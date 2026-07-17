@@ -23,7 +23,7 @@ fn create_dir_if_not_exists(path: &str) -> Result<()> {
     if let Err(e) = create_dir(path)
         && e.kind() != io::ErrorKind::AlreadyExists
     {
-        return Err(Error::from(e).context(format!("Failed to create the directory {path}")));
+        return Err(Error::from(e).context(format!("创建目录 {path} 失败")));
     }
 
     Ok(())
@@ -47,8 +47,7 @@ impl ExerciseDir {
         let mut readme_path = dir_path;
         readme_path.push_str("/README.md");
 
-        fs::write(&readme_path, self.readme)
-            .with_context(|| format!("Failed to write the file {readme_path}"))
+        fs::write(&readme_path, self.readme).with_context(|| format!("写入文件 {readme_path} 失败"))
     }
 }
 
@@ -63,13 +62,13 @@ pub struct EmbeddedFiles {
 impl EmbeddedFiles {
     /// Dump all the embedded files of the `exercises/` directory.
     pub fn init_exercises_dir(&self, exercise_infos: &[ExerciseInfo]) -> Result<()> {
-        create_dir("exercises").context("Failed to create the directory `exercises`")?;
+        create_dir("exercises").context("创建目录 `exercises` 失败")?;
 
         fs::write(
             "exercises/README.md",
             include_bytes!("../exercises/README.md"),
         )
-        .context("Failed to write the file exercises/README.md")?;
+        .context("写入文件 exercises/README.md 失败")?;
 
         for dir in self.exercise_dirs {
             dir.init_on_disk()?;
@@ -89,7 +88,7 @@ impl EmbeddedFiles {
             exercise_path.push_str(".rs");
 
             fs::write(&exercise_path, exercise_files.exercise)
-                .with_context(|| format!("Failed to write the exercise file {exercise_path}"))?;
+                .with_context(|| format!("写入练习文件 {exercise_path} 失败"))?;
         }
 
         Ok(())
@@ -101,7 +100,7 @@ impl EmbeddedFiles {
 
         dir.init_on_disk()?;
         fs::write(path, exercise_files.exercise)
-            .with_context(|| format!("Failed to write the exercise file {path}"))
+            .with_context(|| format!("写入练习文件 {path} 失败"))
     }
 
     /// Write the solution file to disk and return its path.
@@ -128,7 +127,7 @@ impl EmbeddedFiles {
         solution_path.push_str(".rs");
 
         fs::write(&solution_path, exercise_files.solution)
-            .with_context(|| format!("Failed to write the solution file {solution_path}"))?;
+            .with_context(|| format!("写入解答文件 {solution_path} 失败"))?;
 
         Ok(solution_path)
     }
@@ -154,7 +153,7 @@ mod tests {
     #[test]
     fn dirs() {
         let exercises = toml::de::from_str::<InfoFile>(EMBEDDED_FILES.info_file)
-            .expect("Failed to parse `info.toml`")
+            .expect("解析 `info.toml` 失败")
             .exercises;
 
         assert_eq!(exercises.len(), EMBEDDED_FILES.exercise_files.len());

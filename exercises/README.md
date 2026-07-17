@@ -1,6 +1,6 @@
-# Exercise to Book Chapter mapping
+# 练习与书中章节对应关系
 
-| Exercise               | Book Chapter        |
+| 练习                    | 书中章节             |
 | ---------------------- | ------------------- |
 | variables              | §3.1                |
 | functions              | §3.3                |
@@ -23,5 +23,5 @@
 | smart_pointers         | §15, §16.3          |
 | threads                | §16.1-3             |
 | macros                 | §20.5               |
-| clippy                 | Appendix D          |
+| clippy                 | 附录 D               |
 | conversions            | n/a                 |

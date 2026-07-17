@@ -37,9 +37,9 @@ pub fn init() -> Result<()> {
         .stderr(Stdio::null())
         .output()
         .context(
-            "Failed to run the command `cargo locate-project …`\n\
-             Did you already install Rust?\n\
-             Try running `cargo --version` to diagnose the problem.",
+            "运行命令 `cargo locate-project …` 失败\n\
+             是否已经安装 Rust？\n\
+             请运行 `cargo --version` 来诊断问题。",
         )?;
 
     if !Command::new("cargo")
@@ -49,12 +49,12 @@ pub fn init() -> Result<()> {
         .stdout(Stdio::null())
         .stderr(Stdio::null())
         .status()
-        .context("Failed to run the command `cargo clippy --version`")?
+        .context("运行命令 `cargo clippy --version` 失败")?
         .success()
     {
         bail!(
-            "Clippy, the official Rust linter, is missing.\n\
-             Please install it first before initializing Rustlings."
+            "缺少官方 Rust lint 工具 Clippy。\n\
+             请先安装 Clippy，再初始化 Rustlings。"
         )
     }
 
@@ -68,24 +68,25 @@ pub fn init() -> Result<()> {
 
         let workspace_manifest =
             serde_json::de::from_slice::<CargoLocateProject>(&locate_project_output.stdout)
-                .context(
-                    "Failed to read the field `root` from the output of `cargo locate-project …`",
-                )?
+                .context("无法从 `cargo locate-project …` 的输出中读取字段 `root`")?
                 .root;
 
         let workspace_manifest_content = fs::read_to_string(workspace_manifest)
-            .with_context(|| format!("Failed to read the file {}", workspace_manifest.display()))?;
+            .with_context(|| format!("无法读取文件 {}", workspace_manifest.display()))?;
         if !workspace_manifest_content.contains("[workspace]")
             && !workspace_manifest_content.contains("workspace.")
         {
             bail!(
-                "The current directory is already part of a Cargo project.\n\
-                 Please initialize Rustlings in a different directory"
+                "当前目录已经属于一个 Cargo 项目。\n\
+                 请在其他目录中初始化 Rustlings。"
             );
         }
 
-        stdout.write_all(b"This command will create the directory `rustlings/` as a member of this Cargo workspace.\n\
-                           Press ENTER to continue ")?;
+        stdout.write_all(
+            "此命令会在当前 Cargo 工作区中创建 `rustlings/` 目录，并将其作为工作区成员。\n\
+                           按 ENTER 继续 "
+                .as_bytes(),
+        )?;
         press_enter_prompt(&mut stdout)?;
 
         // Make sure "rustlings" is added to `workspace.members` by making
@@ -101,47 +102,47 @@ pub fn init() -> Result<()> {
             .status()?;
         if !status.success() {
             bail!(
-                "Failed to initialize a new Cargo workspace member.\n\
-                 Please initialize Rustlings in a different directory"
+                "初始化新的 Cargo 工作区成员失败。\n\
+                 请在其他目录中初始化 Rustlings。"
             );
         }
 
-        stdout.write_all(b"The directory `rustlings` has been added to `workspace.members` in the `Cargo.toml` file of this Cargo workspace.\n")?;
-        fs::remove_dir_all(rustlings_dir)
-            .context("Failed to remove the temporary directory `rustlings/`")?;
+        stdout.write_all("目录 `rustlings` 已添加到当前 Cargo 工作区的 `Cargo.toml` 文件的 `workspace.members` 中。\n".as_bytes())?;
+        fs::remove_dir_all(rustlings_dir).context("删除临时目录 `rustlings/` 失败")?;
         init_git = false;
     } else {
-        stdout.write_all(b"This command will create the directory `rustlings/` which will contain the exercises.\n\
-                           Press ENTER to continue ")?;
+        stdout.write_all(
+            "此命令会创建包含练习的 `rustlings/` 目录。\n\
+                           按 ENTER 继续 "
+                .as_bytes(),
+        )?;
         press_enter_prompt(&mut stdout)?;
     }
 
-    create_dir(rustlings_dir).context("Failed to create the `rustlings/` directory")?;
-    set_current_dir(rustlings_dir)
-        .context("Failed to change the current directory to `rustlings/`")?;
+    create_dir(rustlings_dir).context("创建 `rustlings/` 目录失败")?;
+    set_current_dir(rustlings_dir).context("切换当前目录到 `rustlings/` 失败")?;
 
     let info_file = InfoFile::parse()?;
     EMBEDDED_FILES
         .init_exercises_dir(&info_file.exercises)
-        .context("Failed to initialize the `rustlings/exercises` directory")?;
+        .context("初始化 `rustlings/exercises` 目录失败")?;
 
-    create_dir("solutions").context("Failed to create the `solutions/` directory")?;
+    create_dir("solutions").context("创建 `solutions/` 目录失败")?;
     fs::write(
         "solutions/README.md",
         include_bytes!("../solutions/README.md"),
     )
-    .context("Failed to create the file rustlings/solutions/README.md")?;
+    .context("创建文件 rustlings/solutions/README.md 失败")?;
     for dir in EMBEDDED_FILES.exercise_dirs {
         let mut dir_path = String::with_capacity(10 + dir.name.len());
         dir_path.push_str("solutions/");
         dir_path.push_str(dir.name);
-        create_dir(&dir_path)
-            .with_context(|| format!("Failed to create the directory {dir_path}"))?;
+        create_dir(&dir_path).with_context(|| format!("创建目录 {dir_path} 失败"))?;
     }
     for exercise_info in &info_file.exercises {
         let solution_path = exercise_info.sol_path();
         fs::write(&solution_path, INIT_SOLUTION_FILE)
-            .with_context(|| format!("Failed to create the file {solution_path}"))?;
+            .with_context(|| format!("创建文件 {solution_path} 失败"))?;
     }
 
     let current_cargo_toml = include_str!("../dev-Cargo.toml");
@@ -150,24 +151,22 @@ pub fn init() -> Result<()> {
         .as_bytes()
         .iter()
         .position(|c| *c == b'\n')
-        .context("The embedded `Cargo.toml` is empty or contains only one line")?;
+        .context("嵌入的 `Cargo.toml` 为空或只包含一行")?;
     let current_cargo_toml = current_cargo_toml
         .get(newline_ind + 1..)
-        .context("The embedded `Cargo.toml` contains only one line")?;
+        .context("嵌入的 `Cargo.toml` 只包含一行")?;
     let updated_cargo_toml = updated_cargo_toml(&info_file.exercises, current_cargo_toml, b"")
-        .context("Failed to generate `Cargo.toml`")?;
-    fs::write("Cargo.toml", updated_cargo_toml)
-        .context("Failed to create the file `rustlings/Cargo.toml`")?;
+        .context("生成 `Cargo.toml` 失败")?;
+    fs::write("Cargo.toml", updated_cargo_toml).context("创建文件 `rustlings/Cargo.toml` 失败")?;
 
     fs::write("rust-analyzer.toml", RUST_ANALYZER_TOML)
-        .context("Failed to create the file `rustlings/rust-analyzer.toml`")?;
+        .context("创建文件 `rustlings/rust-analyzer.toml` 失败")?;
 
-    fs::write(".gitignore", GITIGNORE)
-        .context("Failed to create the file `rustlings/.gitignore`")?;
+    fs::write(".gitignore", GITIGNORE).context("创建文件 `rustlings/.gitignore` 失败")?;
 
-    create_dir(".vscode").context("Failed to create the directory `rustlings/.vscode`")?;
+    create_dir(".vscode").context("创建目录 `rustlings/.vscode` 失败")?;
     fs::write(".vscode/extensions.json", VS_CODE_EXTENSIONS_JSON)
-        .context("Failed to create the file `rustlings/.vscode/extensions.json`")?;
+        .context("创建文件 `rustlings/.vscode/extensions.json` 失败")?;
 
     if init_git && let Ok(dir) = current_dir() {
         let mut dir = dir.as_path();
@@ -193,7 +192,7 @@ pub fn init() -> Result<()> {
     }
 
     stdout.queue(SetForegroundColor(Color::Green))?;
-    stdout.write_all("Initialization done ✓".as_bytes())?;
+    stdout.write_all("初始化完成 ✓".as_bytes())?;
     stdout.queue(ResetColor)?;
     stdout.write_all(b"\n\n")?;
 
@@ -204,11 +203,12 @@ pub fn init() -> Result<()> {
     Ok(())
 }
 
-const INIT_SOLUTION_FILE: &[u8] = b"fn main() {
-    // DON'T EDIT THIS SOLUTION FILE!
-    // It will be automatically filled after you finish the exercise.
+const INIT_SOLUTION_FILE: &[u8] = r#"fn main() {
+    // 不要编辑此解答文件！
+    // 完成练习后，系统会自动填充它。
 }
-";
+"#
+.as_bytes();
 
 pub const RUST_ANALYZER_TOML: &[u8] = br#"check.command = "clippy"
 check.extraArgs = ["--profile", "test"]
@@ -222,17 +222,17 @@ target/
 
 pub const VS_CODE_EXTENSIONS_JSON: &[u8] = br#"{"recommendations":["rust-lang.rust-analyzer"]}"#;
 
-const IN_INITIALIZED_DIR_ERR: &str = "It looks like Rustlings is already initialized in this directory.
+const IN_INITIALIZED_DIR_ERR: &str = "Rustlings 似乎已经在此目录中初始化。
 
-If you already initialized Rustlings, run the command `rustlings` for instructions on getting started with the exercises.
-Otherwise, please run `rustlings init` again in a different directory.";
+如果已经初始化 Rustlings，请运行命令 `rustlings` 查看开始练习的说明。
+否则，请在其他目录中再次运行 `rustlings init`。";
 
-const RUSTLINGS_DIR_ALREADY_EXISTS_ERR: &str =
-    "A directory with the name `rustlings` already exists in the current directory.
-You probably already initialized Rustlings.
-Run `cd rustlings`
-Then run `rustlings` again";
+const RUSTLINGS_DIR_ALREADY_EXISTS_ERR: &str = "当前目录中已经存在名为 `rustlings` 的目录。
+你可能已经初始化过 Rustlings。
+请运行 `cd rustlings`
+然后再次运行 `rustlings`。";
 
-const POST_INIT_MSG: &[u8] = b"Run `cd rustlings` to go into the generated directory.
-Then run `rustlings` to get started.
-";
+const POST_INIT_MSG: &[u8] = r#"运行 `cd rustlings` 进入生成的目录。
+然后运行 `rustlings` 开始练习。
+"#
+.as_bytes();

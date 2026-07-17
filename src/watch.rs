@@ -23,7 +23,7 @@ mod terminal_event;
 static EXERCISE_RUNNING: AtomicBool = AtomicBool::new(false);
 
 // Private unit type to force using the constructor function.
-#[must_use = "When the guard is dropped, the input is unpaused"]
+#[must_use = "守卫被丢弃时，输入会恢复"]
 pub struct InputPauseGuard(());
 
 impl InputPauseGuard {
@@ -111,7 +111,7 @@ fn run_watch(
             },
             WatchEvent::Input(InputEvent::Reset) => watch_state.reset_exercise(&mut stdout)?,
             WatchEvent::Input(InputEvent::Quit) => {
-                stdout.write_all(QUIT_MSG)?;
+                stdout.write_all(QUIT_MSG.as_bytes())?;
                 break;
             }
             WatchEvent::FileChange { exercise_ind } => {
@@ -122,7 +122,7 @@ fn run_watch(
             }
             WatchEvent::NotifyErr(e) => return Err(Error::from(e).context(NOTIFY_ERR)),
             WatchEvent::TerminalEventErr(e) => {
-                return Err(Error::from(e).context("Terminal event listener failed"));
+                return Err(Error::from(e).context("终端事件监听器失败"));
             }
         }
     }
@@ -173,15 +173,15 @@ pub fn watch(
     watch_list_loop(app_state, notify_exercise_names)
 }
 
-const QUIT_MSG: &[u8] = b"q\n
-We hope you're enjoying learning Rust!
-If you want to continue working on the exercises at a later point, you can simply run `rustlings` again in this directory.
+const QUIT_MSG: &str = "q\n
+希望你享受学习 Rust 的过程！
+如果之后想继续练习，只需在此目录中再次运行 `rustlings` 即可。
 ";
 
 const NOTIFY_ERR: &str = "
-The automatic detection of exercise file changes failed :(
-Please try running `rustlings` again.
+自动检测练习文件变更失败 :(
+请尝试再次运行 `rustlings`。
 
-If you keep getting this error, run `rustlings --manual-run` to deactivate the file watcher.
-You need to manually trigger running the current exercise using `r` then.
+如果仍然出现此错误，请运行 `rustlings --manual-run` 以停用文件监视器。
+之后需要使用 `r` 手动触发当前练习的运行。
 ";
