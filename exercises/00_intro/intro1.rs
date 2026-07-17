@@ -1,9 +1,8 @@
-// TODO: We sometimes encourage you to keep trying things on a given exercise
-// even after you already figured it out. If you got everything working and feel
-// ready for the next exercise, enter `n` in the terminal.
+// TODO: 我们有时会鼓励你在已经解出某个练习后继续尝试。
+// 如果一切正常，并且你准备好开始下一个练习，请在终端中输入 `n`。
 //
-// The exercise file will be reloaded when you change one of the lines below!
-// Try adding a new `println!` and check the updated output in the terminal.
+// 当你修改下面的任意一行时，练习文件会重新加载！
+// 试着添加一个新的 `println!`，然后在终端中查看更新后的输出。
 
 fn main() {
     println!(r#"       Welcome to...                      "#);
@@ -14,11 +13,10 @@ fn main() {
     println!(r#" |_|   \__,_|___/\__|_|_|_| |_|\__, |___/ "#);
     println!(r#"                               |___/      "#);
     println!();
-    println!("This exercise compiles successfully. The remaining exercises contain a compiler");
-    println!("or logic error. The central concept behind Rustlings is to fix these errors and");
-    println!("solve the exercises. Good luck!");
+    println!("本练习可以成功编译。剩余练习中会包含编译器错误或逻辑错误。");
+    println!("Rustlings 的核心就是修复这些错误并完成练习。祝你好运！");
     println!();
-    println!("The file of this exercise is `exercises/00_intro/intro1.rs`. Have a look!");
-    println!("The current exercise path will be always shown under the progress bar.");
-    println!("You can click on the path to open the exercise file in your editor.");
+    println!("本练习的文件是 `exercises/00_intro/intro1.rs`。去看看吧！");
+    println!("当前练习的路径总会显示在进度条下方。");
+    println!("你可以点击路径，在编辑器中打开练习文件。");
 }

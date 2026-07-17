@@ -1,4 +1,4 @@
 fn main() {
-    // TODO: Fix the code to print "Hello world!".
+    // TODO: 修复代码，使它打印出 "Hello world!"。
     printline!("Hello world!");
 }
