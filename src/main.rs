@@ -186,10 +186,25 @@ fn main() -> Result<ExitCode> {
     Ok(ExitCode::SUCCESS)
 }
 
-const OLD_METHOD_ERR: &str = "你正在使用 6.0 之前的旧方式运行 Rustlings。
-新方式不需要克隆 Rustlings 仓库。
-请按照 `README.md` 中的说明操作：
-官方说明：https://github.com/rust-lang/rustlings#getting-started";
+const OLD_METHOD_ERR: &str = concat!(
+    "你正在 Rustlings 源码仓库中运行 `rustlings`。\n\
+     Rustlings 6.0 及更高版本不需要克隆源码仓库来学习，也不能在源码仓库目录中运行 `rustlings init`。\n\
+     \n\
+     请在源码仓库之外创建练习目录，然后执行：\n\
+     ",
+    // translation: preserve CLI command examples
+    "    cargo install --git https://github.com/AreChen/rustlings-cn.git --branch main --locked --force\n\
+     mkdir rustlings-cn-study\n\
+     cd rustlings-cn-study\n\
+     rustlings init\n\
+     cd rustlings\n\
+     rustlings\n\
+     \n\
+     ",
+    "上一步初始化没有执行，所以此时不要运行 `cd rustlings`。\n\
+     中文说明：https://github.com/AreChen/rustlings-cn/blob/main/README.zh-CN.md\n\
+     官方说明：https://github.com/rust-lang/rustlings#getting-started"
+);
 
 const FORMAT_VERSION_HIGHER_ERR: &str = "`info.toml` 文件中指定的格式版本高于当前支持的最高版本。
 你使用的 Rustlings 可能已经过时。

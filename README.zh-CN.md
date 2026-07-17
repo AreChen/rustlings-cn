@@ -6,18 +6,33 @@
 
 ## 快速开始
 
-先安装 Rust 和 Cargo，然后克隆本仓库并安装本仓库构建出的 Rustlings：
+### 学习者：安装中文 CLI
+
+Rustlings 6.x 会把练习嵌入已安装的 CLI 中，因此学习 Rust 不需要克隆 Rustlings 源码仓库。先安装 Rust 和 Cargo，然后从本 fork 安装中文 CLI：
 
 ```bash
-git clone https://github.com/AreChen/rustlings-cn.git
-cd rustlings-cn
-cargo install --path . --force
+cargo install --git https://github.com/AreChen/rustlings-cn.git --branch main --locked --force
+mkdir rustlings-cn-study
+cd rustlings-cn-study
 rustlings init
 cd rustlings
 rustlings
 ```
 
-最后一条命令会进入交互式练习模式。你也可以使用以下命令：
+`rustlings init` 会在当前目录创建一个新的 `rustlings/` 子目录，并在初始化过程中等待你按 ENTER 继续。最后一条命令会进入交互式练习模式。
+
+如果你已经克隆了 `rustlings-cn`，也不要在这个源码仓库目录中执行 `rustlings init`。可以先离开源码目录，再创建独立的练习目录：
+
+```bash
+cd ..
+mkdir rustlings-cn-study
+cd rustlings-cn-study
+rustlings init
+cd rustlings
+rustlings
+```
+
+你也可以使用以下命令：
 
 ```bash
 rustlings check-all       # 检查所有练习
@@ -27,6 +42,22 @@ rustlings hint             # 查看下一个练习的提示
 ```
 
 练习本身故意包含待修复的错误，因此刚初始化时不应期待 `check-all` 全部通过。按照终端提示编辑 `exercises/` 下的文件，直到练习完成。
+
+### 贡献者：克隆源码仓库
+
+只有在翻译、更新练习或开发 Rustlings 本身时才需要克隆源码仓库。即使从源码安装 CLI，练习目录仍然应该创建在源码仓库之外：
+
+```bash
+git clone https://github.com/AreChen/rustlings-cn.git
+cd rustlings-cn
+cargo install --path . --locked --force
+cd ..
+mkdir rustlings-cn-study
+cd rustlings-cn-study
+rustlings init
+cd rustlings
+rustlings
+```
 
 ## 中文翻译范围
 
