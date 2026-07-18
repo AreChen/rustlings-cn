@@ -1,13 +1,54 @@
 import json
+import re
 import sys
 import subprocess
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts import check_translation
+
+
+class InfoMetadataTranslationTests(unittest.TestCase):
+    def test_embedded_learner_messages_are_translated(self):
+        root = Path(__file__).resolve().parents[1]
+        metadata = tomllib.loads(
+            (root / "rustlings-macros" / "info.toml").read_text(encoding="utf-8")
+        )
+
+        exercises = metadata["exercises"]
+        self.assertEqual(len(exercises), 94)
+
+        messages = [("welcome_message", metadata["welcome_message"]), ("final_message", metadata["final_message"])]
+        messages.extend((exercise["name"], exercise["hint"]) for exercise in exercises)
+
+        untranslated = []
+        for name, message in messages:
+            self.assertTrue(check_translation.contains_chinese(message), name)
+            in_code_block = False
+            for line in message.splitlines():
+                if line.strip().startswith("```"):
+                    in_code_block = not in_code_block
+                    continue
+                if in_code_block:
+                    continue
+
+                visible = re.sub(r"`[^`]*`", "", line)
+                visible = re.sub(r"https?://\S+", "", visible)
+                if len(check_translation.ENGLISH_WORD_RE.findall(visible)) < 2:
+                    continue
+                if re.match(
+                    r"\s*(?:let|fn|pub|struct|enum|impl|match|if|else|for|while|loop|use|const|type)\b",
+                    visible,
+                ):
+                    continue
+                if check_translation.has_english_words(visible) and not check_translation.contains_chinese(visible):
+                    untranslated.append(f"{name}: {line}")
+
+        self.assertEqual(untranslated, [])
 
 
 class TranslationExtractionTests(unittest.TestCase):
@@ -116,3 +157,4 @@ class UpstreamRiskTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

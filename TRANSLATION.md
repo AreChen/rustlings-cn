@@ -35,6 +35,8 @@
 
 当前仓库以官方 Rustlings 6.5.0 为基线，已覆盖 `exercises/` 下全部练习 Rust 文件和 README，并完成 CLI 学习者可见文案的中文化。练习代码逻辑、练习名称、文件名、API、命令、测试契约字符串和生成模板中的技术字段按同步要求保留。
 
+CLI 首次启动欢迎语、完成提示和 94 条练习提示位于 `rustlings-macros/info.toml`，会被编译进 Rustlings 二进制文件；`scripts/test_check_translation.py` 会单独检查这些嵌入式学习文案。
+
 翻译检查器是状态的唯一可执行来源：
 
 ```bash
@@ -68,3 +70,4 @@ git diff --check
 ```
 
 提交前还应运行 `git fetch upstream`，确认 `main...upstream/main` 的差异，并在必要时更新翻译基线。GitHub Actions 会在 Ubuntu 上自动运行 Rust 测试、格式检查、翻译检查和空白检查。
+

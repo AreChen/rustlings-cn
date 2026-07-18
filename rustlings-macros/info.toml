@@ -1,30 +1,20 @@
 format_version = 1
 
 welcome_message = """
-Is this your first time? Don't worry, Rustlings is made for beginners!
-We are going to teach you a lot of things about Rust, but before we can
-get started, here are some notes about how Rustlings operates:
+这是你第一次使用 Rustlings 吗？别担心，Rustlings 面向初学者！
+我们会带你学习许多 Rust 知识，不过在开始前，先了解 Rustlings 的运行方式：
 
-1. The central concept behind Rustlings is that you solve exercises. These
-   exercises usually contain some compiler or logic errors which cause the
-   exercise to fail compilation or testing. It's your job to find all errors
-   and fix them!
-2. Make sure to have your editor open in the `rustlings/` directory. Rustlings
-   will show you the path of the current exercise under the progress bar. Open
-   the exercise file in your editor, fix errors and save the file. Rustlings
-   will automatically detect the file change and rerun the exercise. If all
-   errors are fixed, Rustlings will ask you to move on to the next exercise.
-3. If you're stuck on an exercise, enter `h` to show a hint.
-4. If an exercise doesn't make sense to you, feel free to open an issue on
-   GitHub! (https://github.com/rust-lang/rustlings). We look at every issue, and
-   sometimes, other learners do too so you can help each other out!"""
+1. Rustlings 的核心是完成练习。这些练习通常包含导致编译或测试失败的编译器错误或逻辑错误。你的任务是找出并修复所有错误！
+2. 确保编辑器打开的是 `rustlings/` 目录。Rustlings 会在进度条下方显示当前练习路径。用编辑器打开练习文件，修复错误并保存。Rustlings 会自动检测文件变化并重新运行练习。修复所有错误后，Rustlings 会提示你进入下一个练习。
+3. 如果你卡在某个练习上，输入 `h` 查看提示。
+4. 如果某个练习不易理解，欢迎在 GitHub 上提交 issue（https://github.com/rust-lang/rustlings）。我们会查看每个 issue，其他学习者有时也会参与讨论，这样大家可以互相帮助！"""
 
 final_message = """
-We hope you enjoyed learning about the various aspects of Rust!
-If you noticed any issues, don't hesitate to report them on GitHub.
-You can also contribute your own exercises to help the greater community!
+希望你喜欢 Rust 的各个方面！
+如果你发现任何问题，欢迎在 GitHub 上报告。
+你也可以贡献自己编写的练习，帮助更广泛的 Rust 社区！
 
-Before reporting an issue or contributing, please read our guidelines:
+在报告问题或参与贡献之前，请先阅读我们的贡献指南：
 https://github.com/rust-lang/rustlings/blob/main/CONTRIBUTING.md"""
 
 # INTRO
@@ -35,16 +25,16 @@ dir = "00_intro"
 test = false
 skip_check_unsolved = true
 hint = """
-Enter `n` to move on to the next exercise.
-You might need to press ENTER after typing `n`."""
+输入 `n` 进入下一个练习。
+输入 `n` 后可能需要按 ENTER。"""
 
 [[exercises]]
 name = "intro2"
 dir = "00_intro"
 test = false
 hint = """
-The compiler is informing us that we've got the name of the print macro wrong.
-It also suggests an alternative."""
+编译器提示我们使用了错误的打印宏名称。
+它还给出了一个可行的替代名称。"""
 
 # VARIABLES
 
@@ -53,84 +43,68 @@ name = "variables1"
 dir = "01_variables"
 test = false
 hint = """
-The declaration in the `main` function is missing a keyword that is needed
-in Rust to create a new variable binding."""
+`main` 函数中的声明缺少一个关键字；在 Rust 中创建新的变量绑定需要使用这个关键字。"""
 
 [[exercises]]
 name = "variables2"
 dir = "01_variables"
 test = false
 hint = """
-The compiler message is saying that Rust can't infer the type that the
-variable binding `x` has with what is given here.
+编译器消息表示，根据当前代码，Rust 无法推断变量绑定 `x` 的类型。
 
-What happens if you annotate the first line in the `main` function with a type
-annotation?
+如果给 `main` 函数的第一行加上类型标注，会发生什么？
 
-What if you give `x` a value?
+如果给 `x` 一个值呢？
 
-What if you do both?
+如果两件事都做呢？
 
-What type should `x` be, anyway?
+无论如何，`x` 应该是什么类型？
 
-What if `x` is the same type as `10`? What if it's a different type?"""
+如果 `x` 和 `10` 是同一种类型呢？如果是不同类型呢？"""
 
 [[exercises]]
 name = "variables3"
 dir = "01_variables"
 test = false
 hint = """
-In this exercise, we have a variable binding that we've created in the `main`
-function, and we're trying to use it in the next line, but we haven't given it
-a value.
+在这个练习中，我们在 `main` 函数中创建了一个变量绑定，并尝试在下一行使用它，但还没有给它赋值。
 
-We can't print out something that isn't there; try giving `x` a value!
+我们不能打印一个不存在的东西；试着给 `x` 一个值！
 
-This is an error that can cause bugs that's very easy to make in any
-programming language -- thankfully the Rust compiler has caught this for us!"""
+这是任何编程语言中都很容易犯、也可能导致 bug 的错误——幸好 Rust 编译器帮我们发现了它！"""
 
 [[exercises]]
 name = "variables4"
 dir = "01_variables"
 test = false
 hint = """
-In Rust, variable bindings are immutable by default. But here, we're trying
-to reassign a different value to `x`! There's a keyword we can use to make
-a variable binding mutable instead."""
+在 Rust 中，变量绑定默认是不可变的。但这里我们试图给 `x` 重新赋一个不同的值！我们可以使用一个关键字，让变量绑定变成可变的。"""
 
 [[exercises]]
 name = "variables5"
 dir = "01_variables"
 test = false
 hint = """
-In `variables4` we already learned how to make an immutable variable mutable
-using a special keyword. Unfortunately this doesn't help us much in this
-exercise because we want to assign a different typed value to an existing
-variable. Sometimes you may also like to reuse existing variable names because
-you are just converting values to different types like in this exercise.
+在 `variables4` 中，我们已经学会了使用特殊关键字将不可变变量变成可变变量。但这对本练习帮助不大，因为我们想给已有变量赋予不同类型的值。有时你也会希望重复使用已有的变量名，例如本练习中只是将值转换为不同类型。
 
-Fortunately Rust has a powerful solution to this problem: 'Shadowing'!
-You can read more about 'Shadowing' in the book's section 'Variables and
-Mutability':
+幸运的是，Rust 为这个问题提供了一个强大的解决方案：“遮蔽（Shadowing）”！
+你可以在《Rust 程序设计语言》的“变量和可变性”章节中进一步了解“遮蔽”：
 https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#shadowing
 
-Try to solve this exercise afterwards using this technique."""
+接下来试着使用这种技术解决本练习。"""
 
 [[exercises]]
 name = "variables6"
 dir = "01_variables"
 test = false
 hint = """
-We know about variables and mutability, but there is another important type of
-variable available: constants.
+我们已经了解了变量和可变性，但还有一种重要的变量类型：常量。
 
-Constants are always immutable. They are declared with the keyword `const`
-instead of `let`.
+常量始终是不可变的。声明常量时使用关键字 `const`，而不是 `let`。
 
-The type of Constants must always be annotated.
+常量的类型必须始终显式标注。
 
-Read more about constants and the differences between variables and constants
-under 'Constants' in the book's section 'Variables and Mutability':
+请阅读《Rust 程序设计语言》“变量和可变性”章节中的“常量”部分，进一步了解常量以及它和变量的区别：
 https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#constants"""
 
 # FUNCTIONS
@@ -140,52 +114,43 @@ name = "functions1"
 dir = "02_functions"
 test = false
 hint = """
-This `main` function is calling a function that it expects to exist, but the
-function doesn't exist. It expects this function to have the name `call_me`.
-It also expects this function to not take any arguments and not return a value.
-Sounds a lot like `main`, doesn't it?"""
+这个 `main` 函数正在调用一个它认为应该存在的函数，但该函数并不存在。它要求这个函数名为 `call_me`，不接收任何参数，也不返回任何值。是不是和 `main` 很像？"""
 
 [[exercises]]
 name = "functions2"
 dir = "02_functions"
 test = false
 hint = """
-Rust requires that all parts of a function's signature have type annotations,
-but `call_me` is missing the type annotation of `num`."""
+Rust 要求函数签名的所有部分都进行类型标注，但 `call_me` 缺少 `num` 的类型标注。"""
 
 [[exercises]]
 name = "functions3"
 dir = "02_functions"
 test = false
 hint = """
-This time, the function *declaration* is okay, but there's something wrong
-with the place where we are calling the function."""
+这一次，函数的*声明*没有问题，但调用函数的位置出了问题。"""
 
 [[exercises]]
 name = "functions4"
 dir = "02_functions"
 test = false
 hint = """
-The error message points to the function `sale_price` and says it expects a type
-after `->`. This is where the function's return type should be.
-Take a look at the `is_even` function for an example!"""
+错误消息指向函数 `sale_price`，并表示 `->` 后面应该有一个类型。这里应该填写函数的返回类型。
+可以参考 `is_even` 函数的写法！"""
 
 [[exercises]]
 name = "functions5"
 dir = "02_functions"
 test = false
 hint = """
-This is a really common error that can be fixed by removing one character.
-It happens because Rust distinguishes between expressions and statements:
-Expressions return a value based on their operand(s), and statements simply
-return a `()` type which behaves just like `void` in C/C++.
+这是一个非常常见的错误，删除一个字符就能修复。
+这是因为 Rust 区分表达式和语句：表达式根据操作数返回一个值，而语句只返回 `()` 类型，它的行为类似于 C/C++ 中的 `void`。
 
-We want to return a value with the type `i32` from the `square` function, but
-it is returning the type `()`.
+我们希望 `square` 函数返回 `i32` 类型的值，但它当前返回的是 `()` 类型。
 
-There are two solutions:
-1. Add the `return` keyword before `num * num;`
-2. Remove the semicolon `;` after `num * num`"""
+有两种解决方案：
+1. 在 `num * num;` 前添加 `return` 关键字。
+2. 删除 `num * num` 后面的分号 `;`。"""
 
 # IF
 
@@ -193,40 +158,38 @@ There are two solutions:
 name = "if1"
 dir = "03_if"
 hint = """
-It's possible to do this in one line if you would like!
+如果愿意，你可以把这段代码写成一行！
 
-Some similar examples from other languages:
-- In C(++) this would be: `a > b ? a : b`
-- In Python this would be:  `a if a > b else b`
+其他语言中的类似示例：
+- 在 C(++) 中可以写成：`a > b ? a : b`
+- 在 Python 中可以写成：`a if a > b else b`
 
-Remember in Rust that:
-- The `if` condition does not need to be surrounded by parentheses
-- `if`/`else` conditionals are expressions
-- Each condition is followed by a `{}` block"""
+请记住，Rust 中：
+- `if` 条件不需要用括号包围。
+- `if`/`else` 条件结构是表达式。
+- 每个条件后面都跟着一个 `{}` 代码块。"""
 
 [[exercises]]
 name = "if2"
 dir = "03_if"
 hint = """
-For that first compiler error, it's important in Rust that each conditional
-block returns the same type!
+针对第一个编译器错误，需要注意：Rust 要求每个条件代码块返回相同的类型！
 
-To get the tests passing, you will need a couple conditions checking different
-input values. Read the tests to find out what they expect."""
+要让测试通过，你需要添加几个条件来检查不同的输入值。阅读测试，看看它们期望什么结果。"""
 
 [[exercises]]
 name = "if3"
 dir = "03_if"
 hint = """
-In Rust, every arm of an `if` expression has to return the same type of value.
-Make sure the type is consistent across all arms."""
+在 Rust 中，`if` 表达式的每个分支都必须返回相同类型的值。
+确保所有分支的类型保持一致。"""
 
 # QUIZ 1
 
 [[exercises]]
 name = "quiz1"
 dir = "quizzes"
-hint = "No hints this time ;)"
+hint = "这次没有提示 ;)"
 
 # PRIMITIVE TYPES
 
@@ -235,44 +198,37 @@ name = "primitive_types1"
 dir = "04_primitive_types"
 test = false
 hint = """
-In Rust, a boolean can be negated using the operator `!` before it.
-Example: `!true == false`
-This also works with boolean variables."""
+在 Rust 中，可以在布尔值前使用 `!` 运算符进行否定。
+示例：`!true == false`
+对布尔变量也同样适用。"""
 
 [[exercises]]
 name = "primitive_types2"
 dir = "04_primitive_types"
 test = false
-hint = "No hints this time ;)"
+hint = "这次没有提示 ;)"
 
 [[exercises]]
 name = "primitive_types3"
 dir = "04_primitive_types"
 test = false
 hint = """
-There's a shorthand to initialize arrays with a certain size that doesn't
-require you to type in 100 items (but you certainly can if you want!).
+有一种简写方式可以初始化指定大小的数组，不需要你输入 100 个元素（当然，如果你愿意，也可以这样做）。
 
-For example, you can do:
+例如：
 ```
 let array = ["Are we there yet?"; 100];
 ```
 
-Bonus: what are some other things you could have that would return `true`
-for `a.len() >= 100`?"""
+加分问题：对于 `a.len() >= 100`，还有哪些内容可以让它返回 `true`？"""
 
 [[exercises]]
 name = "primitive_types4"
 dir = "04_primitive_types"
 hint = """
-Take a look at the 'Understanding Ownership -> The Slice Type -> Other Slices'
-section of the book: https://doc.rust-lang.org/book/ch04-03-slices.html and use
-the starting and ending (plus one) indices of the items in the array that you
-want to end up in the slice.
+请阅读《Rust 程序设计语言》中的“理解所有权 -> 切片类型 -> 其他切片”部分：https://doc.rust-lang.org/book/ch04-03-slices.html，然后使用数组中目标元素的起始索引和结束索引（再加一）来创建切片。
 
-If you're curious why the first argument of `assert_eq!` does not have an
-ampersand for a reference since the second argument is a reference, take a look
-at the coercion chapter of the nomicon:
+如果你想知道为什么 `assert_eq!` 的第一个参数没有使用引用符号 `&`，而第二个参数却是引用，可以阅读 Nomicon 中关于强制转换的章节：
 https://doc.rust-lang.org/nomicon/coercions.html"""
 
 [[exercises]]
@@ -280,23 +236,19 @@ name = "primitive_types5"
 dir = "04_primitive_types"
 test = false
 hint = """
-Take a look at the 'Data Types -> The Tuple Type' section of the book:
+请阅读《Rust 程序设计语言》中的“数据类型 -> 元组类型”部分：
 https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type
-Particularly the part about destructuring (second to last example in the
-section).
+尤其关注结构解构部分（该章节倒数第二个示例）。
 
-You'll need to make a pattern to bind `name` and `age` to the appropriate parts
-of the tuple."""
+你需要编写一个模式，将 `name` 和 `age` 绑定到元组中对应的部分。"""
 
 [[exercises]]
 name = "primitive_types6"
 dir = "04_primitive_types"
 hint = """
-While you could use a destructuring `let` for the tuple here, try
-indexing into it instead, as explained in the last example of the
-'Data Types -> The Tuple Type' section of the book:
+虽然这里可以使用解构 `let` 处理元组，但请按照《Rust 程序设计语言》“数据类型 -> 元组类型”部分最后一个示例的说明，尝试改用索引访问：
 https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type
-Now, you have another tool in your toolbox!"""
+现在你的工具箱里又多了一件工具！"""
 
 # VECS
 
@@ -304,21 +256,17 @@ Now, you have another tool in your toolbox!"""
 name = "vecs1"
 dir = "05_vecs"
 hint = """
-In Rust, there are two basic ways to define a Vector.
-1. One way is to use the `Vec::new()` function to create a new vector
-   and fill it with the `push()` method.
-2. The second way is to use the `vec![]` macro and define your elements
-   inside the square brackets. This way is simpler when you exactly know
-   the initial values.
+在 Rust 中，有两种定义 Vector 的基本方式：
+1. 使用 `Vec::new()` 函数创建新向量，然后用 `push()` 方法填充它。
+2. 使用 `vec![]` 宏，并在方括号中定义元素。当你明确知道初始值时，这种方式更简单。
 
-Check this chapter: https://doc.rust-lang.org/book/ch08-01-vectors.html
-of the Rust book to learn more."""
+请阅读《Rust 程序设计语言》的这一章节，进一步了解相关内容：https://doc.rust-lang.org/book/ch08-01-vectors.html"""
 
 [[exercises]]
 name = "vecs2"
 dir = "05_vecs"
 hint = """
-Use the `.push()` method on the vector to push new elements to it."""
+使用向量的 `.push()` 方法向其中添加新元素。"""
 
 # MOVE SEMANTICS
 
@@ -326,45 +274,32 @@ Use the `.push()` method on the vector to push new elements to it."""
 name = "move_semantics1"
 dir = "06_move_semantics"
 hint = """
-So you've got the "cannot borrow `vec` as mutable, as it is not declared as
-mutable" error on the line where we push an element to the vector, right?
+你在向量中添加元素的那一行遇到了“不能将 `vec` 作为可变对象借用，因为它没有声明为可变”的错误，对吧？
 
-The fix for this is going to be adding one keyword, and the addition is NOT on
-the line where we push to the vector (where the error is).
+修复方法是添加一个关键字，而且这个关键字并不加在向量添加元素的那一行（也就是报错的那一行）。
 
-Try accessing `vec0` after having called `fill_vec()`. See what happens!"""
+试着在调用 `fill_vec()` 后访问 `vec0`，看看会发生什么！"""
 
 [[exercises]]
 name = "move_semantics2"
 dir = "06_move_semantics"
 hint = """
-When running this exercise for the first time, you'll notice an error about
-"borrow of moved value". In Rust, when an argument is passed to a function and
-it's not explicitly returned, you can't use the original variable anymore.
-We call this "moving" a variable. When we pass `vec0` into `fill_vec`, it's
-being "moved" into `vec1`, meaning we can't access `vec0` anymore.
+第一次运行这个练习时，你会看到“借用了已移动的值”错误。在 Rust 中，当参数传递给函数且没有被显式返回时，就不能再使用原来的变量。我们称这种操作为“移动”变量。当我们把 `vec0` 传给 `fill_vec` 时，它会被“移动”到 `vec1` 中，这意味着我们不能再访问 `vec0`。
 
-You could make another, separate version of the data that's in `vec0` and
-pass it to `fill_vec` instead. This is called cloning in Rust."""
+你可以为 `vec0` 中的数据创建另一个独立副本，再把这个副本传给 `fill_vec`。在 Rust 中，这叫作克隆。"""
 
 [[exercises]]
 name = "move_semantics3"
 dir = "06_move_semantics"
 hint = """
-The difference between this one and the previous ones is that the first line
-of `fn fill_vec` that had `let mut vec = vec;` is no longer there. You can,
-instead of adding that line back, add `mut` in one place that will change
-an existing binding to be a mutable binding instead of an immutable one :)"""
+本练习与前几个练习的区别在于，`fn fill_vec` 中原本包含 `let mut vec = vec;` 的第一行已经不在了。你不必把那一行加回来，只需要在一个位置添加 `mut`，就能将已有绑定从不可变绑定改为可变绑定 :)"""
 
 [[exercises]]
 name = "move_semantics4"
 dir = "06_move_semantics"
 hint = """
-Carefully reason about the range in which each mutable reference is in
-scope. Does it help to update the value of `x` immediately after
-the mutable reference is taken?
-Read more about 'Mutable References' in the book's section 'References and
-Borrowing':
+仔细思考每个可变引用的作用域范围。在获取可变引用后立即更新 `x` 的值，会有帮助吗？
+你可以在《Rust 程序设计语言》的“引用和借用”章节中阅读“可变引用”部分：
 https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references."""
 
 [[exercises]]
@@ -372,15 +307,12 @@ name = "move_semantics5"
 dir = "06_move_semantics"
 test = false
 hint = """
-To find the answer, you can consult the book section "References and Borrowing":
+你可以参考《Rust 程序设计语言》的“引用和借用”章节来寻找答案：
 https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
 
-The first problem is that `get_char` is taking ownership of the string. So
-`data` is moved and can't be used for `string_uppercase`. `data` is moved to
-`get_char` first, meaning that `string_uppercase` can't manipulate the data.
+第一个问题是 `get_char` 获取了字符串的所有权。因此 `data` 被移动，不能再用于 `string_uppercase`。`data` 先被移动到 `get_char`，这意味着 `string_uppercase` 无法操作这份数据。
 
-Once you've fixed that, `string_uppercase`'s function signature will also need
-to be adjusted."""
+修复这一点后，还需要调整 `string_uppercase` 的函数签名。"""
 
 # STRUCTS
 
@@ -388,41 +320,35 @@ to be adjusted."""
 name = "structs1"
 dir = "07_structs"
 hint = """
-Rust has more than one type of struct. Three actually, all variants are used to
-package related data together.
+Rust 中不止一种结构体，实际上有三种。它们都可以用来打包相关数据。
 
-There are regular structs. These are named collections of related data stored in
-fields.
+普通结构体是存储在字段中的相关数据的命名集合。
 
-Tuple structs are basically just named tuples.
+元组结构体本质上就是有名称的元组。
 
-Finally, unit structs. These don't have any fields and are useful for generics.
+最后是单元结构体。它们没有任何字段，在泛型中很有用。
 
-In this exercise, you need to complete and implement one of each kind.
-Read more about structs in The Book:
+在本练习中，你需要分别补全并实现这三种结构体中的一个。
+请在《Rust 程序设计语言》中进一步了解结构体：
 https://doc.rust-lang.org/book/ch05-01-defining-structs.html"""
 
 [[exercises]]
 name = "structs2"
 dir = "07_structs"
 hint = """
-Creating instances of structs is easy, all you need to do is assign some values
-to its fields.
+创建结构体实例很简单，只需给它的字段赋值即可。
 
-There are however some shortcuts that can be taken when instantiating structs.
-Have a look in The Book to find out more:
+不过，在实例化结构体时还有一些可以使用的简写方式。
+请阅读《Rust 程序设计语言》了解更多内容：
 https://doc.rust-lang.org/book/ch05-01-defining-structs.html#creating-instances-from-other-instances-with-struct-update-syntax"""
 
 [[exercises]]
 name = "structs3"
 dir = "07_structs"
 hint = """
-Methods and associated functions are both declared in an `impl MyType {}`
-block. Methods have a `self`, `&self` or `&mut self` parameter, where `self`
-implicitly has the type of the impl block. Associated functions do not have
-a `self` parameter.
+方法和关联函数都声明在 `impl MyType {}` 代码块中。方法有一个 `self`、`&self` 或 `&mut self` 参数，其中 `self` 隐式使用 impl 代码块的类型。关联函数没有 `self` 参数。
 
-Have a look in The Book to find out more about method implementations:
+请阅读《Rust 程序设计语言》了解更多方法实现相关内容：
 https://doc.rust-lang.org/book/ch05-03-method-syntax.html"""
 
 # ENUMS
@@ -431,32 +357,31 @@ https://doc.rust-lang.org/book/ch05-03-method-syntax.html"""
 name = "enums1"
 dir = "08_enums"
 test = false
-hint = "No hints this time ;)"
+hint = "这次没有提示 ;)"
 
 [[exercises]]
 name = "enums2"
 dir = "08_enums"
 test = false
 hint = """
-Enum variants can be defined using three different forms: struct-, tuple- and
-unit-like. Here's an example enum definition, which uses all three forms:
-
+枚举变体可以使用三种不同形式定义：结构体式、元组式和单元式。下面是一个使用全部三种形式的枚举定义示例：
+```rust
 enum EnumUsingAllVariantForms {
     StructLike { named_field: bool },
     TupleLike(bool),
     UnitLike,
-}"""
+}
+```"""
 
 [[exercises]]
 name = "enums3"
 dir = "08_enums"
 hint = """
-As a first step, define enums to compile the code without errors.
+第一步，先定义枚举，让代码能够无错误地编译。
 
-Then, create a match expression in `process()`.
+然后，在 `process()` 中创建一个 match 表达式。
 
-Note that you need to deconstruct some message variants in the match expression
-to get the variant's values."""
+注意，在 match 表达式中，你需要解构某些消息变体，才能取得变体中的值。"""
 
 # STRINGS
 
@@ -465,42 +390,30 @@ name = "strings1"
 dir = "09_strings"
 test = false
 hint = """
-The `current_favorite_color` function is currently returning a string slice
-with the `'static` lifetime. We know this because the data of the string lives
-in our code itself -- it doesn't come from a file or user input or another
-program -- so it will live as long as our program lives.
+`current_favorite_color` 函数当前返回一个具有 `'static` 生命周期的字符串切片。我们知道这一点，是因为字符串数据直接存在于代码中——它不是来自文件、用户输入或其他程序——所以它会和程序一样长久存在。
 
-But it is still a string slice. There's one way to create a `String` by
-converting a string slice covered in the Strings chapter of the book, and
-another way that uses the `From` trait."""
+但它仍然是字符串切片。《Rust 程序设计语言》的“字符串”章节介绍了一种通过转换字符串切片来创建 `String` 的方法，另一种方法则使用 `From` trait。"""
 
 [[exercises]]
 name = "strings2"
 dir = "09_strings"
 test = false
 hint = """
-Yes, it would be really easy to fix this by just changing the value bound to
-`word` to be a string slice instead of a `String`, wouldn't it? There is a way
-to add one character to the `if` statement, though, that will coerce the
-`String` into a string slice.
+是的，只要把绑定到 `word` 的值从 `String` 改成字符串切片，就能很容易地修复这个问题，对吧？不过，还有一种方法是在 `if` 语句中添加一个字符，将 `String` 强制转换为字符串切片。
 
-Side note: If you're interested in learning about how this kind of reference
-conversion works, you can jump ahead in the book and read this part in the
-smart pointers chapter:
+补充说明：如果你想了解这种引用转换的原理，可以提前阅读《Rust 程序设计语言》“智能指针”章节中的这一部分：
 https://doc.rust-lang.org/book/ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods"""
 
 [[exercises]]
 name = "strings3"
 dir = "09_strings"
 hint = """
-There are many useful standard library functions for strings. Let's try and use
-some of them:
+标准库中有许多处理字符串的实用函数。让我们试着使用其中几个：
 https://doc.rust-lang.org/std/string/struct.String.html#method.trim
 
-For the `compose_me` method: You can either use the `format!` macro, or convert
-the string slice into an owned string, which you can then freely extend.
+对于 `compose_me` 方法，你可以使用 `format!` 宏，也可以将字符串切片转换为拥有所有权的字符串，然后自由扩展它。
 
-For the `replace_me` method, you can check out the `replace` method:
+对于 `replace_me` 方法，可以参考 `replace` 方法：
 https://doc.rust-lang.org/std/string/struct.String.html#method.replace"""
 
 [[exercises]]
@@ -508,14 +421,13 @@ name = "strings4"
 dir = "09_strings"
 test = false
 hint = """
-Replace `placeholder` with either `string` or `string_slice` in the `main`
-function.
+在 `main` 函数中，将 `placeholder` 替换为 `string` 或 `string_slice`。
 
-Example:
+示例：
 `placeholder("blue");`
-should become
+应该改为
 `string_slice("blue");`
-because "blue" is `&str`, not `String`."""
+因为 "blue" 是 `&str`，而不是 `String`。"""
 
 # MODULES
 
@@ -524,20 +436,16 @@ name = "modules1"
 dir = "10_modules"
 test = false
 hint = """
-Everything is private in Rust by default. But there's a keyword we can use
-to make something public!"""
+Rust 中的所有内容默认都是私有的。不过，我们可以使用一个关键字将内容设为公开！"""
 
 [[exercises]]
 name = "modules2"
 dir = "10_modules"
 test = false
 hint = """
-The `delicious_snacks` module is trying to present an external interface that
-is different than its internal structure (the `fruits` and `veggies` modules
-and associated constants). Complete the `use` statements to fit the uses in
-`main` and find the one keyword missing for both constants.
+`delicious_snacks` 模块试图提供一个与内部结构不同的外部接口（内部结构包括 `fruits` 和 `veggies` 模块以及关联常量）。补全 `use` 语句，使其符合 `main` 中的用法，并找出两个常量都缺少的那个关键字。
 
-Learn more in The Book:
+请在《Rust 程序设计语言》中进一步了解：
 https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html#re-exporting-names-with-pub-use"""
 
 [[exercises]]
@@ -545,9 +453,7 @@ name = "modules3"
 dir = "10_modules"
 test = false
 hint = """
-`UNIX_EPOCH` and `SystemTime` are declared in the `std::time` module. Add a
-`use` statement for these two to bring them into scope. You can use nested
-paths to bring these two in using only one line."""
+`UNIX_EPOCH` 和 `SystemTime` 声明在 `std::time` 模块中。添加一条 `use` 语句，将它们引入当前作用域。你可以使用嵌套路径，只用一行代码引入这两个内容。"""
 
 # HASHMAPS
 
@@ -555,29 +461,26 @@ paths to bring these two in using only one line."""
 name = "hashmaps1"
 dir = "11_hashmaps"
 hint = """
-The number of fruits should be at least 5 and you have to put at least 3
-different types of fruits."""
+水果数量至少应为 5，并且至少要有 3 种不同类型的水果。"""
 
 [[exercises]]
 name = "hashmaps2"
 dir = "11_hashmaps"
 hint = """
-Use the `entry()` and `or_insert()` methods of `HashMap` to achieve this.
+使用 `HashMap` 的 `entry()` 和 `or_insert()` 方法来实现这一点。
 
-Learn more in The Book:
+请在《Rust 程序设计语言》中进一步了解：
 https://doc.rust-lang.org/book/ch08-03-hash-maps.html#only-inserting-a-value-if-the-key-has-no-value"""
 
 [[exercises]]
 name = "hashmaps3"
 dir = "11_hashmaps"
 hint = """
-Hint 1: Use the `entry()` and `or_default()` methods of `HashMap` to insert the
-        default value of `TeamScores` if a team doesn't exist in the table yet.
+提示 1：如果表中还不存在某支队伍，使用 `HashMap` 的 `entry()` 和 `or_default()` 方法插入 `TeamScores` 的默认值。
 
-Hint 2: If there is already an entry for a given key, the value returned by
-        `entry()` can be updated based on the existing value.
+提示 2：如果给定键已经存在条目，可以根据已有值更新 `entry()` 返回的值。
 
-Learn more in The Book:
+请在《Rust 程序设计语言》中进一步了解：
 https://doc.rust-lang.org/book/ch08-03-hash-maps.html#updating-a-value-based-on-the-old-value"""
 
 # QUIZ 2
@@ -585,7 +488,7 @@ https://doc.rust-lang.org/book/ch08-03-hash-maps.html#updating-a-value-based-on-
 [[exercises]]
 name = "quiz2"
 dir = "quizzes"
-hint = "The `+` operator can concatenate a `String` with a `&str`."
+hint = "`+` 运算符可以将 `String` 与 `&str` 拼接起来。"
 
 # OPTIONS
 
@@ -593,38 +496,33 @@ hint = "The `+` operator can concatenate a `String` with a `&str`."
 name = "options1"
 dir = "12_options"
 hint = """
-Options can have a `Some` value, with an inner value, or a `None` value,
-without an inner value.
+`Option` 可以是带有内部值的 `Some`，也可以是不带内部值的 `None`。
 
-There are multiple ways to get at the inner value, you can use `unwrap`, or
-pattern match. Unwrapping is the easiest, but how do you do it safely so that
-it doesn't panic in your face later?"""
+获取内部值有多种方式，你可以使用 `unwrap`，也可以进行模式匹配。解包是最简单的方式，但怎样才能安全地解包，避免之后突然 panic 呢？"""
 
 [[exercises]]
 name = "options2"
 dir = "12_options"
 hint = """
-Check out:
+请参考：
 
 - https://doc.rust-lang.org/rust-by-example/flow_control/if_let.html
 - https://doc.rust-lang.org/rust-by-example/flow_control/while_let.html
 
-Remember that `Option`s can be nested in if-let and while-let statements.
+记住，`Option` 可以嵌套在 if-let 和 while-let 语句中。
 
-For example: `if let Some(Some(x)) = y`
+例如：`if let Some(Some(x)) = y`
 
-Also see `Option::flatten`"""
+还可以查看 `Option::flatten`。"""
 
 [[exercises]]
 name = "options3"
 dir = "12_options"
 test = false
 hint = """
-The compiler says a partial move happened in the `match` statement. How can
-this be avoided? The compiler shows the correction needed.
+编译器提示 `match` 语句中发生了部分移动。如何避免这种情况？编译器已经给出了所需的修改。
 
-After making the correction as suggested by the compiler, read the related docs
-page:
+按照编译器的建议修改后，请阅读相关文档页面：
 https://doc.rust-lang.org/std/keyword.ref.html"""
 
 # ERROR HANDLING
@@ -633,29 +531,22 @@ https://doc.rust-lang.org/std/keyword.ref.html"""
 name = "errors1"
 dir = "13_error_handling"
 hint = """
-`Ok` and `Err` are the two variants of `Result`, so what the tests are saying
-is that `generate_nametag_text` should return a `Result` instead of an `Option`.
+`Ok` 和 `Err` 是 `Result` 的两个变体，因此测试的意思是：`generate_nametag_text` 应该返回 `Result`，而不是 `Option`。
 
-To make this change, you'll need to:
-  - update the return type in the function signature to be a `Result<String,
-    String>` that could be the variants `Ok(String)` and `Err(String)`
-  - change the body of the function to return `Ok(…)` where it currently
-    returns `Some(…)`
-  - change the body of the function to return `Err(error message)` where it
-    currently returns `None`"""
+要完成这一修改，你需要：
+  - 将函数签名中的返回类型改为 `Result<String, String>`，它可以是 `Ok(String)` 或 `Err(String)`
+  - 将函数体中当前返回 `Some(…)` 的位置改为返回 `Ok(…)`
+  - 将函数体中当前返回 `None` 的位置改为返回 `Err(error message)`"""
 
 [[exercises]]
 name = "errors2"
 dir = "13_error_handling"
 hint = """
-One way to handle this is using a `match` statement on
-`item_quantity.parse::<i32>()` where the cases are `Ok(something)` and
-`Err(something)`.
+一种处理方式是对 `item_quantity.parse::<i32>()` 使用 `match` 语句，分支分别为 `Ok(something)` 和 `Err(something)`。
 
-This pattern is very common in Rust, though, so there's the `?` operator that
-does pretty much what you would make that match statement do for you!
+不过，这种模式在 Rust 中非常常见，因此 Rust 提供了 `?` 运算符，它基本上可以替你完成这个 match 语句的工作！
 
-Take a look at this section of the "Error Handling" chapter:
+请阅读“错误处理”章节的这一部分：
 https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator"""
 
 [[exercises]]
@@ -663,58 +554,43 @@ name = "errors3"
 dir = "13_error_handling"
 test = false
 hint = """
-If other functions can return a `Result`, why shouldn't `main`? It's a fairly
-common convention to return something like `Result<(), ErrorType>` from your
-`main` function.
+如果其他函数可以返回 `Result`，为什么 `main` 不可以呢？让 `main` 函数返回类似 `Result<(), ErrorType>` 的类型，是一种很常见的约定。
 
-The unit type `()` is there because nothing is really needed in terms of a
-positive result."""
+这里使用单元类型 `()`，是因为成功时实际上不需要返回任何内容。"""
 
 [[exercises]]
 name = "errors4"
 dir = "13_error_handling"
 hint = """
-`PositiveNonzeroInteger::new` is always creating a new instance and returning
-an `Ok` result. But it should be doing some checking, returning an `Err` if
-those checks fail, and only returning an `Ok` if those checks determine that
-everything is… okay :)"""
+`PositiveNonzeroInteger::new` 总是创建新实例并返回 `Ok` 结果。但它应该执行一些检查：检查失败时返回 `Err`，只有在检查确认一切正常时才返回 `Ok` :)"""
 
 [[exercises]]
 name = "errors5"
 dir = "13_error_handling"
 test = false
 hint = """
-There are two different possible `Result` types produced within the `main`
-function, which are propagated using the `?` operators. How do we declare a
-return type for the `main` function that allows both?
+`main` 函数中会产生两种不同的 `Result` 类型，并通过 `?` 运算符传播。如何为 `main` 函数声明一个能够同时容纳两者的返回类型？
 
-Under the hood, the `?` operator calls `From::from` on the error value to
-convert it to a boxed trait object, a `Box<dyn Error>`. This boxed trait object
-is polymorphic, and since all errors implement the `Error` trait, we can capture
-lots of different errors in one `Box` object.
+在底层，`?` 运算符会对错误值调用 `From::from`，将其转换为装箱的 trait 对象 `Box<dyn Error>`。这个装箱的 trait 对象具有多态性，由于所有错误都实现了 `Error` trait，我们可以用一个 `Box` 对象容纳许多不同的错误。
 
-Check out this section of The Book:
+请阅读《Rust 程序设计语言》的这一部分：
 https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator
 
-Read more about boxing errors:
+进一步了解错误装箱：
 https://doc.rust-lang.org/stable/rust-by-example/error/multiple_error_types/boxing_errors.html
 
-Read more about using the `?` operator with boxed errors:
+进一步了解如何将 `?` 运算符与装箱错误一起使用：
 https://doc.rust-lang.org/stable/rust-by-example/error/multiple_error_types/reenter_question_mark.html"""
 
 [[exercises]]
 name = "errors6"
 dir = "13_error_handling"
 hint = """
-This exercise uses a completed version of `PositiveNonzeroInteger` from the
-previous exercises.
+本练习使用前几个练习中已经完成的 `PositiveNonzeroInteger` 版本。
 
-Below the line that `TODO` asks you to change, there is an example of using
-the `map_err()` method on a `Result` to transform one type of error into
-another. Try using something similar on the `Result` from `parse()`. You
-can then use the `?` operator to return early.
+在 `TODO` 要求你修改的那一行下面，有一个对 `Result` 使用 `map_err()` 方法、将一种错误类型转换为另一种错误类型的示例。试着对 `parse()` 返回的 `Result` 使用类似方法。然后你就可以使用 `?` 运算符提前返回。
 
-Read more about `map_err()` in the `std::result` documentation:
+请在 `std::result` 文档中进一步了解 `map_err()`：
 https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err"""
 
 # Generics
@@ -724,21 +600,16 @@ name = "generics1"
 dir = "14_generics"
 test = false
 hint = """
-Vectors in Rust make use of generics to create dynamically sized arrays of any
-type.
-If the vector `numbers` has the type `Vec<T>`, then we can only push values of
-type `T` to it. By using `into()` before pushing, we ask the compiler to convert
-`n1` and `n2` to `T`. But the compiler doesn't know what `T` is yet and needs a
-type annotation.
+Rust 中的向量使用泛型来创建任意类型的动态大小数组。
+如果向量 `numbers` 的类型是 `Vec<T>`，那么只能向其中添加 `T` 类型的值。在添加之前使用 `into()`，可以要求编译器将 `n1` 和 `n2` 转换为 `T`。但编译器还不知道 `T` 是什么，因此需要类型标注。
 
-`u8` and `i8` can both be converted to `i16`, `i32` and `i64`. Choose one for
-the generic of the vector."""
+`u8` 和 `i8` 都可以转换为 `i16`、`i32` 和 `i64`。为向量的泛型选择其中一种类型。"""
 
 [[exercises]]
 name = "generics2"
 dir = "14_generics"
 hint = """
-Related section in The Book:
+《Rust 程序设计语言》中的相关章节：
 https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions"""
 
 # TRAITS
@@ -747,50 +618,46 @@ https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions"""
 name = "traits1"
 dir = "15_traits"
 hint = """
-More about traits in The Book:
+《Rust 程序设计语言》中关于 trait 的更多内容：
 https://doc.rust-lang.org/book/ch10-02-traits.html
 
-The `+` operator can concatenate a `String` with a `&str`."""
+`+` 运算符可以将 `String` 与 `&str` 拼接起来。"""
 
 [[exercises]]
 name = "traits2"
 dir = "15_traits"
 hint = """
-Notice how the trait takes ownership of `self` and returns `Self`.
+注意 trait 如何获取 `self` 的所有权并返回 `Self`。
 
-Although the signature of `append_bar` in the trait takes `self` as argument,
-the implementation can take `mut self` instead. This is possible because the
-value is owned anyway."""
+虽然 trait 中 `append_bar` 的签名将 `self` 作为参数，但实现可以改为接收 `mut self`。
+这是可行的，因为这个值本来就已经拥有所有权。"""
 
 [[exercises]]
 name = "traits3"
 dir = "15_traits"
 hint = """
-Traits can have a default implementation for functions. Data types that
-implement the trait can then use the default version of these functions
-if they choose not to implement the function themselves.
+trait 可以为函数提供默认实现。实现该 trait 的数据类型，如果不自行实现这些函数，就可以直接使用默认版本。
 
-Related section in The Book:
+《Rust 程序设计语言》中的相关章节：
 https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations"""
 
 [[exercises]]
 name = "traits4"
 dir = "15_traits"
 hint = """
-Instead of using concrete types as parameters you can use traits. Try replacing
-`???` with `impl [what goes here?]`.
+参数不一定要使用具体类型，也可以使用 trait。尝试将 `???` 替换为 `impl [这里应该填什么？]`。
 
-Related section in The Book:
+《Rust 程序设计语言》中的相关章节：
 https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters"""
 
 [[exercises]]
 name = "traits5"
 dir = "15_traits"
 hint = """
-To ensure a parameter implements multiple traits use the '+ syntax'. Try
-replacing `???` with 'impl [what goes here?] + [what goes here?]'.
+要确保一个参数实现多个 trait，请使用“`+` 语法”。尝试将 `???` 替换为
+`impl [这里应该填什么？] + [这里应该填什么？]`。
 
-Related section in The Book:
+《Rust 程序设计语言》中的相关章节：
 https://doc.rust-lang.org/book/ch10-02-traits.html#specifying-multiple-trait-bounds-with-the--syntax"""
 
 # QUIZ 3
@@ -799,14 +666,13 @@ https://doc.rust-lang.org/book/ch10-02-traits.html#specifying-multiple-trait-bou
 name = "quiz3"
 dir = "quizzes"
 hint = """
-To find the best solution to this challenge, you need to recall your knowledge
-of traits, specifically "Trait Bound Syntax":
+要找到这个挑战的最佳解法，需要回忆 trait 的相关知识，尤其是“trait bound 语法”：
 https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bound-syntax
 
-Here is how to specify a trait bound for an implementation block:
+下面是为实现块指定 trait bound 的方式：
 `impl<T: Trait1 + Trait2 + …> for Foo<T> { … }`
 
-You may need this:
+你可能还需要：
 `use std::fmt::Display;`"""
 
 # LIFETIMES
@@ -815,7 +681,7 @@ You may need this:
 name = "lifetimes1"
 dir = "16_lifetimes"
 hint = """
-Let the compiler guide you. Also take a look at The Book if you need help:
+让编译器引导你。如果需要帮助，也可以参考《Rust 程序设计语言》：
 https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html"""
 
 [[exercises]]
@@ -823,20 +689,17 @@ name = "lifetimes2"
 dir = "16_lifetimes"
 test = false
 hint = """
-Remember that the generic lifetime `'a` will get the concrete lifetime that is
-equal to the smaller of the lifetimes of `x` and `y`.
+记住，泛型生命周期 `'a` 会取 `x` 和 `y` 两个生命周期中较短的那个具体生命周期。
 
-You can take at least two paths to achieve the desired result while keeping the
-inner block:
-1. Move the `string2` declaration to make it live as long as `string1` (how is
-   `result` declared?)
-2. Move `println!` into the inner block"""
+在保留内部代码块的前提下，至少有两种方式可以实现目标：
+1. 移动 `string2` 的声明，让它与 `string1` 存活得一样久（想想 `result` 是如何声明的）。
+2. 将 `println!` 移到内部代码块中。"""
 
 [[exercises]]
 name = "lifetimes3"
 dir = "16_lifetimes"
 test = false
-hint = """Let the compiler guide you :)"""
+hint = """让编译器引导你 :)"""
 
 # TESTS
 
@@ -844,33 +707,27 @@ hint = """Let the compiler guide you :)"""
 name = "tests1"
 dir = "17_tests"
 hint = """
-`assert!` is a macro that needs an argument. Depending on the value of the
-argument, `assert!` will do nothing (in which case the test will pass) or
-`assert!` will panic (in which case the test will fail).
+`assert!` 是一个需要参数的宏。根据参数的值，`assert!` 要么什么也不做（此时测试会通过），要么触发 panic（此时测试会失败）。
 
-So try giving different values to `assert!` and see which ones compile, which
-ones pass, and which ones fail :)
+尝试给 `assert!` 传入不同的值，看看哪些能编译、哪些能通过，以及哪些会失败吧 :)
 
-If you want to check for `false`, you can negate the result of what you're
-checking using `!`, like `assert!(!…)`."""
+如果想检查结果是否为 `false`，可以使用 `!` 对待检查的结果取反，例如 `assert!(!…)`。"""
 
 [[exercises]]
 name = "tests2"
 dir = "17_tests"
 hint = """
-`assert_eq!` is a macro that takes two arguments and compares them. Try giving
-it two values that are equal! Try giving it two arguments that are different!
-Try switching which argument comes first and which comes second!"""
+`assert_eq!` 是一个接收两个参数并比较它们的宏。尝试传入两个相等的值！再传入两个不同的参数！还可以交换两个参数的顺序试试！"""
 
 [[exercises]]
 name = "tests3"
 dir = "17_tests"
 hint = """
-We expect the method `Rectangle::new` to panic for negative values.
+我们期望 `Rectangle::new` 在传入负值时触发 panic。
 
-To handle that, you need to add a special attribute to the test function.
+为此，需要给测试函数添加一个特殊属性。
 
-You can refer to the docs:
+可以参考文档：
 https://doc.rust-lang.org/book/ch11-01-writing-tests.html#checking-for-panics-with-should_panic"""
 
 # STANDARD LIBRARY TYPES
@@ -879,8 +736,7 @@ https://doc.rust-lang.org/book/ch11-01-writing-tests.html#checking-for-panics-wi
 name = "iterators1"
 dir = "18_iterators"
 hint = """
-An iterator goes through all elements in a collection, but what if we've run
-out of elements? What should we expect here? If you're stuck, take a look at
+迭代器会遍历集合中的所有元素，但如果元素已经遍历完了呢？这时应该得到什么结果？如果遇到困难，可以查看
 https://doc.rust-lang.org/std/iter/trait.Iterator.html"""
 
 [[exercises]]
@@ -889,72 +745,57 @@ dir = "18_iterators"
 hint = """
 `capitalize_first`:
 
-The variable `first` is a `char`. It needs to be capitalized and added to the
-remaining characters in `chars` in order to return the correct `String`.
+变量 `first` 是一个 `char`。需要将它转换为大写，再与 `chars` 中剩余的字符拼接，才能返回正确的 `String`。
 
-The remaining characters in `chars` can be viewed as a string slice using the
-`as_str` method.
+可以使用 `as_str` 方法将 `chars` 中剩余的字符视为字符串切片。
 
-The documentation for `char` contains many useful methods.
+`char` 的文档中包含许多有用的方法：
 https://doc.rust-lang.org/std/primitive.char.html
 
-Use `char::to_uppercase`. It returns an iterator that can be converted to a
-`String`.
+使用 `char::to_uppercase`。它会返回一个可以转换为 `String` 的迭代器。
 
 `capitalize_words_vector`:
 
-Create an iterator from the slice. Transform the iterated values by applying
-the `capitalize_first` function. Remember to `collect` the iterator.
+从切片创建迭代器。对迭代出的值应用 `capitalize_first` 函数进行转换。记得对迭代器调用 `collect`。
 
 `capitalize_words_string`:
 
-This is surprisingly similar to the previous solution. `collect` is very
-powerful and very general. Rust just needs to know the desired type."""
+这与前一种解法非常相似。`collect` 十分强大且通用，Rust 只需要知道目标类型即可。"""
 
 [[exercises]]
 name = "iterators3"
 dir = "18_iterators"
 hint = """
-The `divide` function needs to return the correct error when the divisor is 0 or
-when even division is not possible.
+当除数为 0，或无法进行整除时，`divide` 函数需要返回正确的错误。
 
-The `division_results` variable needs to be collected into a collection type.
+`division_results` 变量需要被收集到某种集合类型中。
 
-The `result_with_list` function needs to return a single `Result` where the
-success case is a vector of integers and the failure case is a `DivisionError`.
+`result_with_list` 函数需要返回单个 `Result`：成功时包含整数向量，失败时包含 `DivisionError`。
 
-The `list_of_results` function needs to return a vector of results.
+`list_of_results` 函数需要返回一个由多个结果组成的向量。
 
-See https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect for
-how the `FromIterator` trait is used in `collect()`. This trait is REALLY
-powerful! It can make the solution to this exercise much easier."""
+请查看 https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect，了解 `collect()` 如何使用 `FromIterator` trait。
+这个 trait 非常强大！它能让本练习的解法简单许多。"""
 
 [[exercises]]
 name = "iterators4"
 dir = "18_iterators"
 hint = """
-In an imperative language, you might write a `for` loop that updates a mutable
-variable. Or, you might write code utilizing recursion and a match clause. In
-Rust, you can take another functional approach, computing the factorial
-elegantly with ranges and iterators.
+在命令式语言中，你可能会编写一个更新可变变量的 `for` 循环，或者使用递归和 match 分支编写代码。在 Rust 中，还可以采用函数式的方式，利用范围和迭代器优雅地计算阶乘。
 
-Check out the `fold` and `rfold` methods!"""
+看看 `fold` 和 `rfold` 方法！"""
 
 [[exercises]]
 name = "iterators5"
 dir = "18_iterators"
 hint = """
-The documentation for the `std::iter::Iterator` trait contains numerous methods
-that would be helpful here.
+`std::iter::Iterator` trait 的文档中有许多在这里很有帮助的方法。
 
-The `collection` variable in `count_collection_iterator` is a slice of
-`HashMap`s. It needs to be converted into an iterator in order to use the
-iterator methods.
+`count_collection_iterator` 中的 `collection` 变量是一个 `HashMap` 切片。要使用迭代器方法，需要先将它转换为迭代器。
 
-The `fold` method can be useful in the `count_collection_iterator` function.
+`fold` 方法可能对 `count_collection_iterator` 函数很有用。
 
-For a further challenge, consult the documentation for `Iterator` to find
-a different method that could make your code more compact than using `fold`."""
+想进一步挑战的话，可以查阅 `Iterator` 的文档，找出一种比使用 `fold` 更简洁的写法。"""
 
 # SMART POINTERS
 
@@ -962,61 +803,48 @@ a different method that could make your code more compact than using `fold`."""
 name = "smart_pointers1"
 dir = "19_smart_pointers"
 hint = """
-The compiler's message should help: Since we cannot store the value of the
-actual type when working with recursive types, we need to store a reference
-(pointer) to its value.
+编译器的提示应该能帮上忙：处理递归类型时，无法直接存储实际类型的值，因此需要存储指向该值的引用（指针）。
 
-We should, therefore, place our `List` inside a `Box`. More details in The Book:
+因此，应该将 `List` 放入 `Box` 中。《Rust 程序设计语言》中有更多细节：
 https://doc.rust-lang.org/book/ch15-01-box.html#enabling-recursive-types-with-boxes
 
-Creating an empty list should be fairly straightforward (Hint: Read the tests).
+创建空列表应该比较直接（提示：阅读测试）。
 
-For a non-empty list, keep in mind that we want to use our `Cons` list builder.
-Although the current list is one of integers (`i32`), feel free to change the
-definition and try other types!"""
+对于非空列表，请记住要使用 `Cons` 列表构造器。虽然当前列表中的元素是整数（`i32`），但也可以修改定义，尝试其他类型！"""
 
 [[exercises]]
 name = "smart_pointers2"
 dir = "19_smart_pointers"
 hint = """
-This is a straightforward exercise to use the `Rc<T>` type. Each `Planet` has
-ownership of the `Sun`, and uses `Rc::clone()` to increment the reference count
-of the `Sun`.
+这是一个直接使用 `Rc<T>` 类型的练习。每个 `Planet` 都拥有 `Sun` 的所有权，并使用 `Rc::clone()` 增加 `Sun` 的引用计数。
 
-After using `drop()` to move the `Planet`s out of scope individually, the
-reference count goes down.
+分别使用 `drop()` 让 `Planet` 离开作用域后，引用计数会减少。
 
-In the end, the `Sun` only has one reference again, to itself.
+最后，`Sun` 又只剩下一个指向自身的引用。
 
-See more at: https://doc.rust-lang.org/book/ch15-04-rc.html
+更多内容请参阅：https://doc.rust-lang.org/book/ch15-04-rc.html
 
-Unfortunately, Pluto is no longer considered a planet :("""
+遗憾的是，冥王星已经不再被认为是行星了 :("""
 
 [[exercises]]
 name = "smart_pointers3"
 dir = "19_smart_pointers"
 test = false
 hint = """
-Make `shared_numbers` be an `Arc` from the `numbers` vector. Then, in order
-to avoid creating a copy of `numbers`, you'll need to create `child_numbers`
-inside the loop but still in the main thread.
+让 `shared_numbers` 成为由 `numbers` 向量创建的 `Arc`。为了避免复制 `numbers`，需要在主线程中、循环内部创建 `child_numbers`。
 
-`child_numbers` should be a clone of the `Arc` of the numbers instead of a
-thread-local copy of the numbers.
+`child_numbers` 应该是 numbers 对应 `Arc` 的克隆，而不是线程本地的 numbers 副本。
 
-This is a simple exercise if you understand the underlying concepts, but if this
-is too much of a struggle, consider reading through all of Chapter 16 in The
-Book:
+如果理解了底层概念，这是一个简单的练习；如果觉得困难，可以阅读《Rust 程序设计语言》第 16 章：
 https://doc.rust-lang.org/book/ch16-00-concurrency.html"""
 
 [[exercises]]
 name = "smart_pointers4"
 dir = "19_smart_pointers"
 hint = """
-If `Cow` already owns the data, it doesn't need to clone it when `to_mut()` is
-called.
+如果 `Cow` 已经拥有数据，那么调用 `to_mut()` 时就不需要克隆数据。
 
-Check out the documentation of the `Cow` type:
+请查看 `Cow` 类型的文档：
 https://doc.rust-lang.org/std/borrow/enum.Cow.html"""
 
 # THREADS
@@ -1026,15 +854,13 @@ name = "threads1"
 dir = "20_threads"
 test = false
 hint = """
-`JoinHandle` is a struct that is returned from a spawned thread:
+`JoinHandle` 是生成线程后返回的结构体：
 https://doc.rust-lang.org/std/thread/fn.spawn.html
 
-A challenge with multi-threaded applications is that the main thread can
-finish before the spawned threads are done.
+多线程应用的一个问题是，主线程可能会在生成的线程完成之前结束。
 https://doc.rust-lang.org/book/ch16-01-threads.html#waiting-for-all-threads-to-finish-using-join-handles
 
-Use the `JoinHandle`s to wait for each thread to finish and collect their
-results.
+使用 `JoinHandle` 等待每个线程完成，并收集它们的结果。
 
 https://doc.rust-lang.org/std/thread/struct.JoinHandle.html"""
 
@@ -1043,36 +869,30 @@ name = "threads2"
 dir = "20_threads"
 test = false
 hint = """
-`Arc` is an Atomic Reference Counted pointer that allows safe, shared access
-to **immutable** data. But we want to *change* the number of `jobs_done` so
-we'll need to also use another type that will only allow one thread to mutate
-the data at a time. Take a look at this section of the book:
+`Arc` 是一种原子引用计数指针，可以安全地共享访问**不可变**数据。但我们想要*修改* `jobs_done` 的数量，因此还需要使用另一种类型，使同一时刻只能有一个线程修改数据。请查看书中的这一节：
 https://doc.rust-lang.org/book/ch16-03-shared-state.html#atomic-reference-counting-with-arct
 
-Keep reading if you'd like more hints :)
+如果想要更多提示，请继续阅读 :)
 
-Do you now have an `Arc<Mutex<JobStatus>>` at the beginning of `main`? Like:
+现在 `main` 开头是否已经有一个 `Arc<Mutex<JobStatus>>`？类似这样：
 ```
 let status = Arc::new(Mutex::new(JobStatus { jobs_done: 0 }));
 ```
 
-Similar to the code in the following example in The Book:
+这与《Rust 程序设计语言》中下面示例的代码类似：
 https://doc.rust-lang.org/book/ch16-03-shared-state.html#sharing-a-mutext-between-multiple-threads"""
 
 [[exercises]]
 name = "threads3"
 dir = "20_threads"
 hint = """
-An alternate way to handle concurrency between threads is to use an `mpsc`
-(multiple producer, single consumer) channel to communicate.
+处理线程间并发的另一种方式，是使用 `mpsc`（多生产者、单消费者）通道进行通信。
 
-With both a sending end and a receiving end, it's possible to send values in
-one thread and receive them in another.
+通道同时具有发送端和接收端，因此可以在一个线程中发送值，再在另一个线程中接收。
 
-Multiple producers are possible by using `clone()` to create a duplicate of the
-original sending end.
+可以使用 `clone()` 创建原发送端的副本，从而支持多个生产者。
 
-Related section in The Book:
+《Rust 程序设计语言》中的相关章节：
 https://doc.rust-lang.org/book/ch16-02-message-passing.html"""
 
 # MACROS
@@ -1082,41 +902,34 @@ name = "macros1"
 dir = "21_macros"
 test = false
 hint = """
-When you call a macro, you need to add something special compared to a regular
-function call."""
+调用宏时，需要添加一些区别于普通函数调用的特殊内容。"""
 
 [[exercises]]
 name = "macros2"
 dir = "21_macros"
 test = false
 hint = """
-Macros don't quite play by the same rules as the rest of Rust, in terms of
-what's available where.
+就“在哪里可以使用什么”而言，宏并不完全遵循 Rust 其他部分的规则。
 
-Unlike other things in Rust, the order of "where you define a macro" versus
-"where you use it" actually matters."""
+与 Rust 中的其他内容不同，“在哪里定义宏”和“在哪里使用宏”的顺序确实很重要。"""
 
 [[exercises]]
 name = "macros3"
 dir = "21_macros"
 test = false
 hint = """
-In order to use a macro outside of its module, you need to do something
-special to the module to lift the macro out into its parent."""
+要在模块外使用宏，需要对模块做一些特殊处理，将宏提升到它的父模块中。"""
 
 [[exercises]]
 name = "macros4"
 dir = "21_macros"
 test = false
 hint = """
-You only need to add a single character to make this compile.
+只需要添加一个字符，就能让代码通过编译。
 
-The way macros are written, it wants to see something between each "macro arm",
-so it can separate them.
+按照宏的写法，每个“宏分支”之间需要有分隔内容，这样宏才能将它们区分开。
 
-That's all the macro exercises we have in here, but it's barely even scratching
-the surface of what you can do with Rust's macros. For a more thorough
-introduction, you can have a read through 'The Little Book of Rust Macros':
+这里的宏练习到此结束，但这还只是 Rust 宏能力的冰山一角。想要更全面的介绍，可以阅读《Rust 宏小书》：
 https://veykril.github.io/tlborm/"""
 
 #  CLIPPY
@@ -1127,16 +940,12 @@ dir = "22_clippy"
 test = false
 strict_clippy = true
 hint = """
-Rust stores the highest precision version of some long or infinite precision
-mathematical constants in the Rust standard library:
+Rust 标准库中保存了一些长精度或无限精度数学常量的最高精度版本：
 https://doc.rust-lang.org/stable/std/f32/consts/index.html
 
-We may be tempted to use our own approximations for certain mathematical
-constants, but clippy recognizes those imprecise mathematical constants as a
-source of potential error.
+我们可能会想为某些数学常量使用自己的近似值，但 clippy 会将这些不精确的数学常量识别为潜在错误来源。
 
-See the suggestions of the Clippy warning in the compile output and use the
-appropriate replacement constant from `std::f32::consts`."""
+查看编译输出中的 Clippy 警告建议，并使用 `std::f32::consts` 中对应的替代常量。"""
 
 [[exercises]]
 name = "clippy2"
@@ -1144,11 +953,9 @@ dir = "22_clippy"
 test = false
 strict_clippy = true
 hint = """
-`for` loops over `Option` values are more clearly expressed as an `if-let`
-statement.
+遍历 `Option` 值的 `for` 循环，用 `if-let` 语句表达会更加清晰。
 
-Not required to solve this exercise, but if you are interested in when iterating
-over `Option` can be useful, read the following section in the documentation:
+虽然解答本练习不要求了解这一点，但如果你想知道遍历 `Option` 何时有用，可以阅读文档中的以下章节：
 https://doc.rust-lang.org/std/option/#iterating-over-option"""
 
 [[exercises]]
@@ -1156,7 +963,7 @@ name = "clippy3"
 dir = "22_clippy"
 test = false
 strict_clippy = true
-hint = "No hints this time!"
+hint = "这次没有提示！"
 
 # TYPE CONVERSIONS
 
@@ -1164,18 +971,17 @@ hint = "No hints this time!"
 name = "conversions1"
 dir = "23_conversions"
 hint = """
-Use the `as` operator to cast one of the operands in the last line of the
-`average` function into the expected return type."""
+使用 `as` 运算符，将 `average` 函数最后一行中的一个操作数转换为预期的返回类型。"""
 
 [[exercises]]
 name = "conversions2"
 dir = "23_conversions"
 hint = """
-The formula for converting from Fahrenheit to Celsius is: C = (F - 32) / 1.8
-This can be derived from the first formula:
+华氏温度转换为摄氏温度的公式是：C = (F - 32) / 1.8
+这个公式可以由下面的初始公式推导出来：
 
-             F = C * 1.8 + 32   // now subtract 32 on both sides
-        F - 32 = C * 1.8        // then divide by 1.8
+             F = C * 1.8 + 32   // 现在将等式两边都减去 32
+        F - 32 = C * 1.8        // 然后除以 1.8
 (F - 32) / 1.8 = C
 """
 
@@ -1183,31 +989,26 @@ This can be derived from the first formula:
 name = "conversions3"
 dir = "23_conversions"
 hint = """
-The implementation of `FromStr` should return an `Ok` with a `Person` object,
-or an `Err` with an error if the string is not valid.
+`FromStr` 的实现应该在字符串有效时返回包含 `Person` 对象的 `Ok`，字符串无效时返回包含错误的 `Err`。
 
-This is almost like the previous `from_into` exercise, but returning errors
-instead of falling back to a default value.
+这与前面的 `from_into` 练习几乎一样，但这里需要返回错误，而不是退回默认值。
 
-Another hint: You can use the `map_err` method of `Result` with a function or a
-closure to wrap the error from `parse::<u8>`.
+另一个提示：可以将 `Result` 的 `map_err` 方法与函数或闭包结合起来，包装 `parse::<u8>` 产生的错误。
 
-Yet another hint: If you would like to propagate errors by using the `?`
-operator in your solution, you might want to look at
+再提示一点：如果想在解法中使用 `?` 运算符传播错误，可以参考
 https://doc.rust-lang.org/stable/rust-by-example/error/multiple_error_types/reenter_question_mark.html"""
 
 [[exercises]]
 name = "conversions4"
 dir = "23_conversions"
 hint = """
-Is there an implementation of `TryFrom` in the standard library that can both do
-the required integer conversion and check the range of the input?
+标准库中是否有某个 `TryFrom` 实现，既能完成所需的整数转换，又能检查输入的范围？
 
-Challenge: Can you make the `TryFrom` implementations generic over many integer
-types?"""
+挑战：能否让 `TryFrom` 的实现适用于多种整数类型？"""
 
 [[exercises]]
 name = "conversions5"
 dir = "23_conversions"
 hint = """
-Add `AsRef<str>` or `AsMut<u32>` as a trait bound to the functions."""
+将 `AsRef<str>` 或 `AsMut<u32>` 作为 trait bound 添加到这些函数上。"""
+
