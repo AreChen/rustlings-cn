@@ -12,7 +12,7 @@ authors = [
   # Alumni
   "Carol (Nichols || Goulding) <carol.nichols@gmail.com>", # https://github.com/carols10cents
 ]
-repository = "https://github.com/rust-lang/rustlings"
+repository = "https://github.com/AreChen/rustlings-cn"
 license = "MIT"
 edition = "2024" # On Update: Update the edition of `rustfmt` in `dev check` and `CARGO_TOML` in `dev new`.
 rust-version = "1.88"
@@ -23,7 +23,7 @@ toml = { version = "1", default-features = false, features = ["std", "parse", "s
 
 [package]
 name = "rustlings"
-description = "Small exercises to get you used to reading and writing Rust code!"
+description = "通过小练习熟悉 Rust 代码的阅读与编写！"
 version.workspace = true
 authors.workspace = true
 repository.workspace = true

@@ -4,6 +4,8 @@
 
 本仓库当前以官方 Rustlings 6.5.0 的代码和练习结构为同步基线。上游仓库仍然是 Rustlings 的事实来源；中文翻译、术语和贡献流程由本仓库维护。
 
+在线阅读：[Rustlings 中文版](https://arechen.github.io/rustlings-cn/)
+
 ## 快速开始
 
 ### 学习者：安装中文 CLI

@@ -1,75 +1,73 @@
 +++
-title = "Community Exercises"
+title = "社区练习"
 +++
 
-## List of Community Exercises
+## 社区练习列表
 
-- 🇯🇵 [Japanese Rustlings](https://github.com/sotanengel/rustlings-jp)：A Japanese translation of the Rustlings exercises.
-- 🇨🇳 [Simplified Chinese Rustlings](https://github.com/SandmeyerX/rustlings-zh-cn): A simplified Chinese translation of the Rustlings exercises.
-- 🇺🇦 [Rustlings in Ukrainian](https://github.com/noroutine/rustlings-ua): Translation of the Rustlings exercises in Ukrainian.
-- 🇰🇷 [Korean Rustlings](https://github.com/eoncheole/rustlings-kr): A Korean translation of the Rustlings exercises.
+- 🇨🇳 [Rustlings 中文版（本项目）](@/_index.md)：面向简体中文用户的 Rustlings 翻译版。
+- 🇯🇵 [Japanese Rustlings](https://github.com/sotanengel/rustlings-jp)：Rustlings 练习的日文翻译版。
+- 🇨🇳 [Simplified Chinese Rustlings](https://github.com/SandmeyerX/rustlings-zh-cn)：Rustlings 练习的简体中文翻译版。
+- 🇺🇦 [Rustlings in Ukrainian](https://github.com/noroutine/rustlings-ua)：Rustlings 练习的乌克兰语翻译版。
+- 🇰🇷 [Korean Rustlings](https://github.com/eoncheole/rustlings-kr)：Rustlings 练习的韩文翻译版。
 
-> You can use the same `rustlings` program that you installed with `cargo install rustlings` to run community exercises.
+> 你可以使用通过 `cargo install` 安装的同一个 `rustlings` 程序运行社区练习。
 
-## Creating Community Exercises
+## 创建社区练习
 
-Rustling's support for community exercises allows you to create your own exercises to focus on some specific topic.
-You could also offer a translation of the original Rustlings exercises as community exercises.
+Rustlings 对社区练习的支持，让你可以创建专注于特定主题的练习。
+你也可以将原版 Rustlings 练习翻译成其他语言，并作为社区练习发布。
 
-### Getting Started
+### 开始创建
 
-To create community exercises, install Rustlings and run `rustlings dev new PROJECT_NAME`.
-This command will, similar to `cargo new PROJECT_NAME`, create the template directory `PROJECT_NAME` with all what you need to get started.
+要创建社区练习，请安装 Rustlings，然后运行 `rustlings dev new PROJECT_NAME`。
+这个命令类似于 `cargo new PROJECT_NAME`，会创建名为 `PROJECT_NAME` 的模板目录，其中包含开始开发所需的全部内容。
 
-_Read the comments_ in the generated `info.toml` file to understand its format.
-It allows you to set a custom welcome and final message and specify the metadata of every exercise.
+请阅读生成的 `info.toml` 文件中的_注释_，了解它的格式。
+你可以在其中设置自定义的欢迎语和结束语，并指定每个练习的元数据。
 
-### Creating an Exercise
+### 创建练习
 
-Here is an example of the metadata of one exercise:
+下面是一个练习元数据的示例：
 
 ```toml
 [[exercises]]
 name = "intro1"
 hint = """
-To finish this exercise, you need to …
-These links might help you …"""
+完成这个练习需要……
+这些链接可能会对你有所帮助……"""
 ```
 
-After entering this in `info.toml`, create the file `intro1.rs` in the `exercises/` directory.
-The exercise needs to contain a `main` function, but it can be empty.
-Adding tests is recommended.
-Look at the official Rustlings exercises for inspiration.
+将这些内容写入 `info.toml` 后，在 `exercises/` 目录中创建 `intro1.rs` 文件。
+练习必须包含一个 `main` 函数，但函数体可以为空。
+建议为练习添加测试。
+可以参考官方 Rustlings 练习获取灵感。
 
-You can optionally add a solution file `intro1.rs` to the `solutions/` directory.
+你也可以选择在 `solutions/` 目录中添加 `intro1.rs` 解答文件。
 
-Now, run `rustlings dev check`.
-It will tell you about any issues with your exercises.
-For example, it will tell you to run `rustlings dev update` to update the `Cargo.toml` file to include the new exercise `intro1`.
+现在运行 `rustlings dev check`。
+它会告诉你练习中存在的问题。
+例如，它会提示你运行 `rustlings dev update`，更新 `Cargo.toml` 以包含新的练习 `intro1`。
 
-`rustlings dev check` will also run your solutions (if you have any) to make sure that they run successfully.
+如果有解答文件，`rustlings dev check` 还会运行它们，确保它们能够成功执行。
+就是这样！你的第一个练习完成了 🎉
 
-That's it!
-You finished your first exercise 🎉
+### Cargo.toml 配置
 
-### Cargo.toml
+除了 `bin` 列表以外，你可以按照需要修改 `Cargo.toml` 文件。
 
-Except of the `bin` list, you can modify the `Cargo.toml` file as you want.
+> 运行 `rustlings dev update` 会自动更新 `bin` 列表。
 
-> The `bin` list is automatically updated by running `rustlings dev update`
+- 你可以在 `[dependencies]` 表中添加依赖。
+- 你可能希望为所有练习[配置 lint](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section)，可以在 `[lints.rust]` 和 `[lints.clippy]` 表中完成配置。
 
-- You can add dependencies in the `[dependencies]` table.
-- You might want to [configure some lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section) for all exercises. You can do so in the `[lints.rust]` and `[lints.clippy]` tables.
+### 发布
 
-### Publishing
+现在，继续添加练习，并将其发布为 Git 仓库。
 
-Now, add more exercises and publish them as a Git repository.
+用户只需克隆该仓库并在其中运行 `rustlings`，就可以开始完成你的练习（与官方练习相同）。
+与官方练习不同的是，在用户完成练习之前，解答文件不会被隐藏。
+不过，你可以相信用户不会过早打开解答 😉
 
-Users just have to clone that repository and run `rustlings` in it to start working on your exercises (just like the official ones).
+### 分享
 
-One difference to the official exercises is that the solution files will not be hidden until the user finishes an exercise.
-But you can trust your users to not open the solution too early 😉
-
-### Sharing
-
-After publishing your community exercises, open an issue or a pull request in the [official Rustlings repository](https://github.com/rust-lang/rustlings) to add your project to the [list of community exercises](#list-of-community-exercises) 😃
+发布社区练习后，可以在[官方 Rustlings 仓库](https://github.com/rust-lang/rustlings)中创建 Issue 或 Pull Request，将项目加入本页面的社区练习列表 😃

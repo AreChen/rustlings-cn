@@ -1,55 +1,55 @@
 +++
-title = "Usage"
+title = "使用"
 +++
 
 <!-- toc -->
 
-## Doing exercises
+## 完成练习
 
-The exercises are sorted by topic and can be found in the subdirectory `exercises/<topic>`.
-For every topic, there is an additional `README.md` file with some resources to get you started on the topic.
-We highly recommend that you have a look at them before you start 📚️
+练习按照主题分类，位于 `exercises/<topic>` 子目录中。
+每个主题还包含一个 `README.md` 文件，其中有帮助你入门该主题的资料。
+我们强烈建议在开始练习前先阅读这些资料 📚️
 
-Most exercises contain an error that keeps them from compiling, and it's up to you to fix it!
-Some exercises contain tests that need to pass for the exercise to be done ✅
+大多数练习都包含会阻止编译的错误，需要你亲手修复！
+有些练习还包含测试，只有测试通过后才算完成 ✅
 
-Search for `TODO` and `todo!()` to find out what you need to change.
-Ask for hints by entering `h` in the _watch mode_ 💡
+搜索 `TODO` 和 `todo!()`，找到需要修改的位置。
+在_监视模式（Watch Mode）_中输入 `h` 获取提示 💡
 
-## Watch Mode
+## 监视模式（Watch Mode）
 
-After the [initialization](@/setup/index.md#initialization), Rustlings can be launched by simply running the command `rustlings`.
+完成[初始化](@/setup/index.md)后，只需运行 `rustlings` 命令即可启动 Rustlings。
 
-This will start the _watch mode_ which walks you through the exercises in a predefined order (what we think is best for newcomers).
-It will rerun the current exercise automatically every time you change the exercise's file in the `exercises/` directory.
+这会启动_监视模式_，按照预先设定的顺序带你完成练习（我们认为这个顺序最适合初学者）。
+每当你修改 `exercises/` 目录中的练习文件时，它都会自动重新运行当前练习。
 
-{% details(summary="If detecting file changes in the <code>exercises/</code> directory fails…") %}
+{% details(summary="如果无法检测 <code>exercises/</code> 目录中的文件变化……") %}
 
-You can add the **`--manual-run`** flag (`rustlings --manual-run`) to manually rerun the current exercise by entering `r` in the watch mode.
+你可以添加 **`--manual-run`** 参数（`rustlings --manual-run`），然后在监视模式中输入 `r`，手动重新运行当前练习。
 
-Please [report the issue](https://github.com/rust-lang/rustlings/issues/new) with some information about your operating system and whether you run Rustlings in a container or a virtual machine (e.g. WSL).
+请在[官方 Rustlings 仓库](https://github.com/rust-lang/rustlings/issues/new)报告问题，并附上操作系统信息，以及你是否在容器或虚拟机（例如 WSL）中运行 Rustlings。
 
 {% end %}
 
-## Exercise List
+## 练习列表
 
-In the [watch mode](#watch-mode) (after launching `rustlings`), you can enter `l` to open the interactive exercise list.
+启动 `rustlings` 后，在监视模式中输入 `l`，可以打开交互式练习列表。
 
-The list allows you to…
+在列表中，你可以：
 
-- See the status of all exercises (done or pending)
-- `c`: Continue at another exercise (temporarily skip some exercises or go back to a previous one)
-- `r`: Reset status and file of the selected exercise (you need to _reload/reopen_ its file in your editor afterwards)
+- 查看所有练习的状态（已完成或待完成）；
+- `c`：从另一个练习继续（临时跳过某些练习，或返回之前的练习）；
+- `r`：重置选中练习的状态和文件（之后需要在编辑器中_重新加载或重新打开_该文件）。
 
-See the footer of the list for all possible keys.
+所有可用按键都显示在列表底部。
 
-## Questions?
+## 有问题？
 
-If you need any help while doing the exercises and the builtin hints aren't helpful, feel free to ask in the [_Q&A_ discussions](https://github.com/rust-lang/rustlings/discussions/categories/q-a?discussions_q=) if your question isn't answered there 💡
+如果练习过程中需要帮助，而内置提示又无法解决问题，欢迎先查看或前往 [Q&A 讨论区](https://github.com/rust-lang/rustlings/discussions/categories/q-a?discussions_q=)提问 💡
 
-## Continuing On
+## 继续学习
 
-Once you've completed Rustlings, put your new knowledge to good use!
-Continue practicing your Rust skills by building your own projects, contributing to Rustlings, or finding other open-source projects to contribute to.
+完成 Rustlings 后，把学到的知识运用起来吧！
+你可以构建自己的项目、参与 Rustlings 贡献，或寻找其他开源项目继续练习 Rust 技能。
 
-> If you want to create your own Rustlings exercises, visit the [**community exercises**](@/community-exercises/index.md) page 🏗️
+> 如果你想创建自己的 Rustlings 练习，请参阅[**社区练习**](@/community-exercises/index.md)页面 🏗️
