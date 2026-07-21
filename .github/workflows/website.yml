@@ -23,7 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install TailwindCSS
-        run: npm install
+        run: npm ci
+      - name: Audit npm dependencies
+        run: npm audit --audit-level=high
       - name: Build CSS
         run: npx @tailwindcss/cli -m -i input.css -o static/main.css
       - name: Download Zola
