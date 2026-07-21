@@ -51,6 +51,18 @@ class InfoMetadataTranslationTests(unittest.TestCase):
         self.assertEqual(untranslated, [])
 
 
+class BookLinkTests(unittest.TestCase):
+    def test_embedded_hints_use_the_chinese_book(self):
+        root = Path(__file__).resolve().parents[1]
+        info_text = (root / "rustlings-macros" / "info.toml").read_text(encoding="utf-8")
+
+        self.assertNotIn("https://doc.rust-lang.org/book", info_text)
+        self.assertIn(
+            "https://arechen.github.io/book-cn/ch03-02-data-types.html#the-tuple-type",
+            info_text,
+        )
+
+
 class TranslationExtractionTests(unittest.TestCase):
     def test_markdown_code_blocks_are_not_translation_units(self):
         text = """# 中文主题
