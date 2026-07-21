@@ -18,12 +18,12 @@
 
 ### 任务 1: 为交互文案建立失败回归测试
 
-**文件：**
+#### 文件：
 
 - 修改：`scripts/test_check_translation.py`
 - 测试：同一测试文件中的 `InfoMetadataTranslationTests`
 
-**步骤：**
+#### 步骤：
 
 - [x] 使用 `tomllib` 读取 `rustlings-macros/info.toml`。
 - [x] 检查欢迎语、完成提示和 94 条 hint 的数量。
@@ -32,12 +32,12 @@
 
 ### 任务 2: 翻译嵌入式学习文案
 
-**文件：**
+#### 文件：
 
 - 修改：`rustlings-macros/info.toml`
 - 修改：必要时更新 `TRANSLATION.md` 的覆盖范围说明
 
-**步骤：**
+#### 步骤：
 
 - [x] 翻译 `welcome_message` 和 `final_message`。
 - [x] 按现有练习顺序翻译全部 94 条 `hint`。
@@ -46,7 +46,7 @@
 
 ### 任务 3: 验证嵌入后的 CLI
 
-**步骤：**
+#### 步骤：
 
 - [x] 运行 Python 翻译测试和覆盖检查。
 - [x] 运行 `cargo fmt --all -- --check` 和 `cargo test --all-targets`。
@@ -55,7 +55,7 @@
 
 ### 任务 4: 发布
 
-**步骤：**
+#### 步骤：
 
 - [ ] 审阅差异并提交翻译补全。
 - [ ] 推送 `rustlings-cn` 的 `main` 分支。
