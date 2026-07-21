@@ -1,7 +1,7 @@
 +++
 +++
 
-通过一组小练习，熟悉阅读和编写 [Rust](https://www.rust-lang.org/zh-CN) 代码，并学会理解编译器提示。建议配合阅读[官方《Rust 程序设计语言》](https://doc.rust-lang.org/book/) 📚️
+通过一组小练习，熟悉阅读和编写 [Rust](https://www.rust-lang.org/zh-CN) 代码，并学会理解编译器提示。建议配合阅读[我们翻译的中文版《Rust 程序设计语言》](https://arechen.github.io/book-cn/) 📚️
 
 <script src="https://asciinema.org/a/719805.js" id="asciicast-719805" async="true"></script>
 
