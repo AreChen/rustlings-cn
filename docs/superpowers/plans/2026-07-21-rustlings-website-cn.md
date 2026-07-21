@@ -75,4 +75,4 @@
 - [x] **步骤 1：** 运行 `npm ci`、Tailwind CSS 构建和 Zola 构建。
 - [x] **步骤 2：** 扫描构建产物中的官方站点域名，确认它只出现在允许的外部资源说明中，不出现在站内导航和 canonical URL 中。
 - [x] **步骤 3：** 检查关键页面 HTML 的中文标题、`lang="zh-CN"` 和本站链接。
-- [ ] **步骤 4：** 提交并推送修改，触发 Website workflow，确认 lint、构建、npm audit 和 Pages 部署全部通过。
+- [x] **步骤 4：** 提交并推送修改，触发 Website workflow，确认 lint、构建、npm audit 和 Pages 部署全部通过。
