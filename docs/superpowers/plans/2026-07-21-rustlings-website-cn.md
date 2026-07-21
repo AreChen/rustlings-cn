@@ -20,9 +20,12 @@
 ### 任务 1: 更新网站站点身份与链接生成
 
 **文件：**
+
 - 修改：`website/config.toml`
 - 修改：`website/templates/base.html`
 - 修改：`website/templates/404.html`
+
+**步骤：**
 
 - [x] **步骤 1：** 将 `base_url` 改为 `https://arechen.github.io/rustlings-cn`，把导航和页脚标签翻译为中文，并把 Repository、Changelog、MIT License 指向中文 fork。
 - [x] **步骤 2：** 将 HTML `lang` 改为 `zh-CN`，翻译页脚声明和 404 页面按钮文案。
@@ -31,11 +34,14 @@
 ### 任务 2: 翻译网站内容
 
 **文件：**
+
 - 修改：`website/templates/index.html`
 - 修改：`website/content/_index.md`
 - 修改：`website/content/setup/index.md`
 - 修改：`website/content/usage/index.md`
 - 修改：`website/content/community-exercises/index.md`
+
+**步骤：**
 
 - [x] **步骤 1：** 翻译主页简介、快速开始和引导链接，并使用中文 fork 的安装命令。
 - [x] **步骤 2：** 翻译安装页、初始化说明、编辑器和终端建议、离线文档说明及错误提示。
@@ -45,9 +51,12 @@
 ### 任务 3: 补充仓库入口信息
 
 **文件：**
+
 - 修改：`README.md`
 - 修改：`Cargo.toml`
 - 修改：GitHub 仓库 metadata（`AreChen/rustlings-cn`）
+
+**步骤：**
 
 - [x] **步骤 1：** 在 README 标题后的介绍区域加入中文 Website 在线地址。
 - [x] **步骤 2：** 将 Cargo package 的 repository 和 description 与中文 fork 保持一致。
@@ -56,9 +65,12 @@
 ### 任务 4: 验证并发布
 
 **文件：**
+
 - 验证：`website/public/` 构建产物
 - 验证：`website/content/` 与 `website/templates/` 的链接
 - 验证：GitHub Actions Website workflow
+
+**步骤：**
 
 - [x] **步骤 1：** 运行 `npm ci`、Tailwind CSS 构建和 Zola 构建。
 - [x] **步骤 2：** 扫描构建产物中的官方站点域名，确认它只出现在允许的外部资源说明中，不出现在站内导航和 canonical URL 中。
